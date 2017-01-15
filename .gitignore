@@ -50,5 +50,9 @@ Temporary Items
 /AJCarRentals-ejb/dist/
 /AJCarRentals-war/dist/
 /AjCarRental/nbproject/private/
+<<<<<<< HEAD
 /AjCarRental/build/
 /AjCarRental/dist/
+=======
+/AjCarRental/build/
+>>>>>>> origin/master
