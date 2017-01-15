@@ -61,6 +61,10 @@ public class loginServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        if (request.getParameter("Submit") != null) {
+            
+        }
+        
         processRequest(request, response);
     }
         
