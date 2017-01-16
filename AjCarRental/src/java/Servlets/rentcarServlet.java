@@ -80,6 +80,10 @@ public class rentcarServlet extends HttpServlet {
             throws ServletException, IOException {
         if (request.getParameter("Submit") != null) {
             try {
+                //get parameters
+                
+                //PaymentCode goes here
+                
                 HybernateUtil hu = new HybernateUtil();
                 SessionFactory sessionFactory = hu.getSessionFactory();
 
@@ -90,7 +94,8 @@ public class rentcarServlet extends HttpServlet {
                session.getTransaction().commit();
 
                 session = sessionFactory.openSession();
-                Transaction tx = session.beginTransaction();
+                //Transaction tx = session.beginTransaction();
+                session.beginTransaction();
 
                 Booking b = new Booking(c, "Johan Nilsson", "gatan2", "johan@mail.se", "0713131", "false", "2000", "2017-01-16", "2017-01-16", "2017-01-21", "Kristianstad", "Kristianstad");
                 session.save(b);
