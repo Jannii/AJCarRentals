@@ -5,30 +5,26 @@
  */
 package Servlets;
 
-import EntityBeans.Login;
-import EntityBeans.User;
+import Hibernate.HybernateUtil;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
-import org.hibernate.cfg.Configuration;
-import Hibernate.HybernateUtil;
-import static java.util.Collections.list;
-import java.util.List;
-import org.hibernate.Query;
 
 /**
  *
  * @author Johan Nilsson
  */
-@WebServlet(name = "loginServlet", urlPatterns = {"/loginServlet"})
-public class loginServlet extends HttpServlet {
+@WebServlet(name = "addmemberServlet", urlPatterns = {"/addmemberServlet"})
+public class addmemberServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -71,43 +67,42 @@ public class loginServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        processRequest(request, response);
         if (request.getParameter("Submit") != null) {
-            String user = request.getParameter("username");
-            String pass = request.getParameter("password");
-            
-            HybernateUtil hu = new HybernateUtil();
+            String username = request.getParameter("username");
+            String userpass = request.getParameter("password");
+            String name = request.getParameter("name");
+            String adress = request.getParameter("adress");
+            String email = request.getParameter("email");
+            String phone = request.getParameter("phone");
+            try{
+                HybernateUtil hu = new HybernateUtil();
             SessionFactory sessionFactory = hu.getSessionFactory();
             Session session = sessionFactory.getCurrentSession();
             Transaction tx = session.beginTransaction();
             
-            String queryString = "Select l from Login l where l.username= :user" ;
-            Query query = session.createQuery(queryString);
-            query.setParameter("user", user);
-            List<EntityBeans.Login> loginlist = query.list();
-            for(EntityBeans.Login login: loginlist){
-                if(login.getUsername().equals(user)&& login.getUserpass().equals(pass)){
-                    
-                }
-                    
-            }
+            String queryString = "INSERT INTO login set username = :username, userpass = :userpass";
+            Query query = session.createSQLQuery(queryString);
+            query.setParameter("username", username);
+            query.setParameter("userpass", userpass);
+            
+            queryString = "INSERT INTO user set Login_idLogin = LAST_INSERT_ID(), Name = :name, Adress=:adress, Email =:email, Phone = :phone";
+            query = session.createSQLQuery(queryString);
+            query.setParameter("name", name);
+            query.setParameter("adress", adress);
+            query.setParameter("email", email);
+            query.setParameter("phone", phone);
             tx.commit();
             hu.close();
-//            try {
-//               Session session = hu.getSessionFactory().openSession();
-//               session.beginTransaction();
-//               u = (Login) session.get(Login.class, 2);
-//               String name  = u.getUsername();
-//               System.out.println(name);
-//            } catch (Exception e) {
-//                e.printStackTrace();
-//            }
-               
-               
+                System.out.println("Success");
+            }catch(Exception e){
+                e.printStackTrace();
+            }
+                
+         
         }
-        
-        processRequest(request, response);
     }
-        
+
     /**
      * Returns a short description of the servlet.
      *
