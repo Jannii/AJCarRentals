@@ -12,19 +12,24 @@ public class Login  implements java.io.Serializable {
      private Integer idLogin;
      private String username;
      private String userpass;
+     private String status;
+
+    
      private User user;
 
     public Login() {
     }
 
 	
-    public Login(String username, String userpass) {
+    public Login(String username, String userpass, String status) {
         this.username = username;
         this.userpass = userpass;
+        this.status = status;
     }
-    public Login(String username, String userpass, User user) {
+    public Login(String username, String userpass, String status, User user) {
        this.username = username;
        this.userpass = userpass;
+       this.status = status;
        this.user = user;
     }
    
@@ -55,6 +60,13 @@ public class Login  implements java.io.Serializable {
     
     public void setUser(User user) {
         this.user = user;
+    }
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 
      

@@ -42,7 +42,7 @@ public class loginServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        
+
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -79,16 +79,27 @@ public class loginServlet extends HttpServlet {
             SessionFactory sessionFactory = hu.getSessionFactory();
             Session session = sessionFactory.getCurrentSession();
             Transaction tx = session.beginTransaction();
-            
-            String queryString = "Select l from Login l where l.username= :user" ;
+
+
+            String queryString = "Select l from Login l where l.username= :user";
             Query query = session.createQuery(queryString);
             query.setParameter("user", user);
             List<EntityBeans.Login> loginlist = query.list();
-            for(EntityBeans.Login login: loginlist){
-                if(login.getUsername().equals(user)&& login.getUserpass().equals(pass)){
-                    
+            for (EntityBeans.Login login : loginlist) {
+                if (login.getUsername().equals(user) && login.getUserpass().equals(pass)) {
+                    System.out.println("Success");
+                    try {
+                    if (login.getStatus().equals("member")) {
+                        request.getRequestDispatcher("homemember.jsp").forward(request, response);
+                    } else if (login.getStatus().equals("admin")) {
+                        request.getRequestDispatcher("homeadmin.jsp").forward(request, response);
+                    }
+                    } catch (Exception ex) {
+                        ex.printStackTrace();
+                    }
+
                 }
-                    
+
             }
             tx.commit();
             hu.close();
@@ -101,13 +112,12 @@ public class loginServlet extends HttpServlet {
 //            } catch (Exception e) {
 //                e.printStackTrace();
 //            }
-               
-               
+
         }
-        
+
         processRequest(request, response);
     }
-        
+
     /**
      * Returns a short description of the servlet.
      *
