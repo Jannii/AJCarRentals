@@ -116,11 +116,15 @@ public class addmemberServlet extends HttpServlet {
                 
 
                 hu.close();
-                System.out.println("Success");
+                request.getRequestDispatcher("addmembersuccess.jsp").forward(request, response);
             } catch (Exception e) {
                 e.printStackTrace();
             }
 
+        }
+        if (request.getParameter("okbtn") != null) {
+            
+            request.getRequestDispatcher("homemember.jsp").forward(request, response);
         }
     }
 

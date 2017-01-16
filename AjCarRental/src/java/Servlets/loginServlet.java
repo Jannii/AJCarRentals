@@ -74,33 +74,46 @@ public class loginServlet extends HttpServlet {
         if (request.getParameter("Submit") != null) {
             String user = request.getParameter("username");
             String pass = request.getParameter("password");
-            
+
             HybernateUtil hu = new HybernateUtil();
             SessionFactory sessionFactory = hu.getSessionFactory();
             Session session = sessionFactory.getCurrentSession();
             Transaction tx = session.beginTransaction();
 
-
             String queryString = "Select l from Login l where l.username= :user";
             Query query = session.createQuery(queryString);
             query.setParameter("user", user);
             List<EntityBeans.Login> loginlist = query.list();
+            System.out.println("cretaing list");
             for (EntityBeans.Login login : loginlist) {
+                System.out.println("in for loop");
                 if (login.getUsername().equals(user) && login.getUserpass().equals(pass)) {
                     System.out.println("Success");
                     try {
-                    if (login.getStatus().equals("member")) {
-                        request.getRequestDispatcher("homemember.jsp").forward(request, response);
-                    } else if (login.getStatus().equals("admin")) {
-                        request.getRequestDispatcher("homeadmin.jsp").forward(request, response);
-                    }
+                        if (login.getStatus().equals("member")) {
+                            System.out.println("member");
+                            request.getRequestDispatcher("homecasual.jsp").forward(request, response);
+                        } else if (login.getStatus().equals("admin")) {
+                            request.getRequestDispatcher("homeadmin.jsp").forward(request, response);
+                        }
                     } catch (Exception ex) {
                         ex.printStackTrace();
                     }
 
+                } else {
+                    String error = "Your Username and/or Password dont exist";
+                    System.out.println("redirect to login in for");
+                    request.setAttribute("error", error);
+                    request.getRequestDispatcher("login.jsp").forward(request, response);
                 }
-
             }
+            if (loginlist.size() == 0) {
+                String error = "Your Username and/or Password dont exist";
+                System.out.println("redirekt to login utside for");
+                request.setAttribute("error", error);
+                request.getRequestDispatcher("login.jsp").forward(request, response);
+            }
+            System.out.println("tx.commit");
             tx.commit();
             hu.close();
 //            try {
