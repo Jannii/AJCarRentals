@@ -6,6 +6,7 @@
 package Servlets;
 
 import EntityBeans.Login;
+import EntityBeans.User;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -17,6 +18,10 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
+import Hibernate.HybernateUtil;
+import static java.util.Collections.list;
+import java.util.List;
+import org.hibernate.Query;
 
 /**
  *
@@ -69,7 +74,34 @@ public class loginServlet extends HttpServlet {
         if (request.getParameter("Submit") != null) {
             String user = request.getParameter("username");
             String pass = request.getParameter("password");
-            
+            Login u;
+            HybernateUtil hu = new HybernateUtil();
+            SessionFactory sessionFactory = hu.getSessionFactory();
+            Session session = sessionFactory.getCurrentSession();
+            Transaction tx = session.beginTransaction();
+            String queryString = "Select l from Login l where l.username= :user" ;
+            Query query = session.createQuery(queryString);
+            query.setParameter("user", user);
+            List<EntityBeans.Login> loginlist = query.list();
+            for(EntityBeans.Login login: loginlist){
+                if(login.getUsername().equals(user)&& login.getUserpass().equals(pass)){
+                    System.out.println("Success");
+                }
+                    
+            }
+            tx.commit();
+            hu.close();
+//            try {
+//               Session session = hu.getSessionFactory().openSession();
+//               session.beginTransaction();
+//               u = (Login) session.get(Login.class, 2);
+//               String name  = u.getUsername();
+//               System.out.println(name);
+//            } catch (Exception e) {
+//                e.printStackTrace();
+//            }
+               
+               
         }
         
         processRequest(request, response);

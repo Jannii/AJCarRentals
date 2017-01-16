@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 2017-jan-16 15:21:23 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="EntityBeans.Car" table="car" catalog="ajcarrental" optimistic-lock="version">
+        <id name="idCar" type="java.lang.Integer">
+            <column name="idCar" />
+            <generator class="identity" />
+        </id>
+        <property name="carName" type="string">
+            <column name="CarName" length="45" not-null="true" />
+        </property>
+        <property name="carType" type="string">
+            <column name="CarType" length="45" not-null="true" />
+        </property>
+        <property name="carHome" type="string">
+            <column name="CarHome" length="45" not-null="true" />
+        </property>
+        <property name="carlocation" type="string">
+            <column name="Carlocation" length="45" not-null="true" />
+        </property>
+        <set name="bookings" table="booking" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="Car_idCar" not-null="true" />
+            </key>
+            <one-to-many class="EntityBeans.Booking" />
+        </set>
+    </class>
+</hibernate-mapping>

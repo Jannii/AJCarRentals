@@ -1,0 +1,19 @@
+
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 2017-jan-16 15:21:23 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="EntityBeans.Login" table="login" catalog="ajcarrental" optimistic-lock="version">
+        <id name="idLogin" type="java.lang.Integer">
+            <column name="idLogin" />
+            <generator class="increment" />
+        </id>
+        <property name="username" type="string" >
+           <column name="username" length="45" not-null="true" unique="true" />
+        </property>
+        <property name="userpass" type="string">
+            <column name="userpass" length="45" not-null="true" />
+        </property>
+        <one-to-one name="user" class="EntityBeans.User"></one-to-one>
+    </class>
+</hibernate-mapping>
