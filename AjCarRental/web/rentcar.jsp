@@ -13,5 +13,8 @@
     </head>
     <body>
         <h1>Hello World!</h1>
+        <form action="rentcarServlet" method="post">
+        <input type="submit" name="Submit">
+        </form>
     </body>
 </html>

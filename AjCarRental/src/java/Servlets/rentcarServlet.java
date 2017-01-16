@@ -5,6 +5,9 @@
  */
 package Servlets;
 
+import EntityBeans.Booking;
+import EntityBeans.Car;
+import Hibernate.HybernateUtil;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -12,6 +15,9 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
 
 /**
  *
@@ -37,7 +43,7 @@ public class rentcarServlet extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet rentcarServlet</title>");            
+            out.println("<title>Servlet rentcarServlet</title>");
             out.println("</head>");
             out.println("<body>");
             out.println("<h1>Servlet rentcarServlet at " + request.getContextPath() + "</h1>");
@@ -72,7 +78,30 @@ public class rentcarServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        if (request.getParameter("Submit") != null) {
+            try {
+                HybernateUtil hu = new HybernateUtil();
+                SessionFactory sessionFactory = hu.getSessionFactory();
+
+               Session session = sessionFactory.openSession();
+               session.beginTransaction();
+               Car c = new Car();        
+               c = (Car) session.get(Car.class, 1);
+               session.getTransaction().commit();
+
+                session = sessionFactory.openSession();
+                Transaction tx = session.beginTransaction();
+
+                Booking b = new Booking(c, "Johan Nilsson", "gatan2", "johan@mail.se", "0713131", "false", "2000", "2017-01-16", "2017-01-16", "2017-01-21", "Kristianstad", "Kristianstad");
+                session.save(b);
+                session.getTransaction().commit();
+
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
+        }
         processRequest(request, response);
+
     }
 
     /**
