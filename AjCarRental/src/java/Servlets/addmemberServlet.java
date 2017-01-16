@@ -5,6 +5,8 @@
  */
 package Servlets;
 
+import EntityBeans.Login;
+import EntityBeans.User;
 import Hibernate.HybernateUtil;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -38,7 +40,7 @@ public class addmemberServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        
+
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -71,35 +73,54 @@ public class addmemberServlet extends HttpServlet {
         if (request.getParameter("Submit") != null) {
             String username = request.getParameter("username");
             String userpass = request.getParameter("password");
+
             String name = request.getParameter("name");
             String adress = request.getParameter("adress");
             String email = request.getParameter("email");
             String phone = request.getParameter("phone");
-            try{
+            Login lid = null;
+            try {
                 HybernateUtil hu = new HybernateUtil();
-            SessionFactory sessionFactory = hu.getSessionFactory();
-            Session session = sessionFactory.getCurrentSession();
-            Transaction tx = session.beginTransaction();
-            
-            String queryString = "INSERT INTO login set username = :username, userpass = :userpass";
-            Query query = session.createSQLQuery(queryString);
-            query.setParameter("username", username);
-            query.setParameter("userpass", userpass);
-            
-            queryString = "INSERT INTO user set Login_idLogin = LAST_INSERT_ID(), Name = :name, Adress=:adress, Email =:email, Phone = :phone";
-            query = session.createSQLQuery(queryString);
-            query.setParameter("name", name);
-            query.setParameter("adress", adress);
-            query.setParameter("email", email);
-            query.setParameter("phone", phone);
-            tx.commit();
-            hu.close();
+                SessionFactory sessionFactory = hu.getSessionFactory();
+                Session session = sessionFactory.getCurrentSession();
+                Transaction tx = session.beginTransaction();
+    
+                Login l = new Login(username, userpass, "member");
+                session.save(l);
+                session.getTransaction().commit();
+                        
+                session = sessionFactory.getCurrentSession();
+                tx = session.beginTransaction();
+
+
+                String queryString = "Select l from Login l where l.username= :user";
+                Query query = session.createQuery(queryString);
+                query.setParameter("user", username);
+
+                List<EntityBeans.Login> loginlist = query.list();
+                for (EntityBeans.Login login : loginlist) {
+                    if (login.getUsername().equals(username) && login.getUserpass().equals(userpass)) {
+                        lid = new Login(login.getUsername(), login.getUserpass(), login.getStatus());
+                        lid.setIdLogin(login.getIdLogin());
+                    }
+                }
+                tx.commit();
+                session = sessionFactory.getCurrentSession();
+                tx = session.beginTransaction();
+
+                User u = new User(lid, name, adress, email, phone);
+                u.setLoginIdLogin(lid.getIdLogin());
+
+                session.save(u);
+                session.getTransaction().commit();
+                
+
+                hu.close();
                 System.out.println("Success");
-            }catch(Exception e){
+            } catch (Exception e) {
                 e.printStackTrace();
             }
-                
-         
+
         }
     }
 
