@@ -16,7 +16,7 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <table border="1">
+        <table border="0">
             <thead>
                 <tr>
                     <th></th>
@@ -25,7 +25,6 @@
             </thead>
             <tbody>
                    <%
-           
             List<Car> l = (List<Car>) request.getAttribute("Carlist");
             Iterator itr = l.iterator();
             while (itr.hasNext()) {
