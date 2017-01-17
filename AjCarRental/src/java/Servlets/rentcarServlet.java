@@ -117,7 +117,7 @@ public class rentcarServlet extends HttpServlet {
 //                session.save(b);
 //                session.getTransaction().commit();
                   
-                  String message = "Johan Nilsson*gatan2*johan@mail.se*0713131*false*2000*2017-01-16*2017-01-16*2017-01-21*Kristianstad*Kristianstad";
+                  String message = "Johan Nilsson/gatan2/axel.malmberg0002@stud.hkr.se/0713131/false/2000/2017-01-16/2017-01-16/2017-01-21/Kristianstad/Kristianstad";
                   sendMessage(message);
             } catch (Exception ex) {
                 ex.printStackTrace();

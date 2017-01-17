@@ -12,6 +12,7 @@ import javax.jms.JMSException;
 import javax.jms.Message;
 import javax.jms.MessageListener;
 import javax.jms.TextMessage;
+import JavaClasses.SendEmail;
 
 /**
  *
@@ -41,12 +42,16 @@ public class ReqMessage implements MessageListener {
                 msg = (TextMessage) message;
                 smessage = msg.getText();
                 System.out.println("\n******* RegMessage-MDB******** Message from RegQueue: Length = " + smessage.length() + "\tcontent = ******** " + smessage + "******");
-                
-                
-                //This is where I could call my calcBean which does the calculation
-                //Since I havent implemented the feature I thought I might as well comment it out for now
-                //calcBean cb = new calcBean();
-                //cb.calc(smessage);
+                //
+                //System.out.println(InfoArr[2] + "Funkar det?");
+                String s = smessage;
+                String[] InfoArr = s.split("/");
+                String mail = InfoArr[2];
+                String body = "Hi " + InfoArr[0] + ". Your order was successfull. You can pick up your car at " + InfoArr[9] + " on " + InfoArr[6];
+                System.out.println(mail);
+                System.out.println(body);
+                SendEmail SE = new SendEmail();
+                SE.SendEmail(mail, body);
                 
             } else {
                System.err.println("RegMessage-MDB!!!!!! Message of wrong type: " +  message.getClass().getName());
