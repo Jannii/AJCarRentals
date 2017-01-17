@@ -100,24 +100,24 @@ public class rentcarServlet extends HttpServlet {
                 
                 //PaymentCode goes here
                 
-                HybernateUtil hu = new HybernateUtil();
-                SessionFactory sessionFactory = hu.getSessionFactory();
-
-               Session session = sessionFactory.openSession();
-               session.beginTransaction();
-               Car c = new Car();        
-               c = (Car) session.get(Car.class, 1);
-               session.getTransaction().commit();
-
-                session = sessionFactory.openSession();
-                //Transaction tx = session.beginTransaction();
-                session.beginTransaction();
-
-                Booking b = new Booking(c, "Johan Nilsson", "gatan2", "johan@mail.se", "0713131", "false", "2000", "2017-01-16", "2017-01-16", "2017-01-21", "Kristianstad", "Kristianstad");
-                session.save(b);
-                session.getTransaction().commit();
+//                HybernateUtil hu = new HybernateUtil();
+//                SessionFactory sessionFactory = hu.getSessionFactory();
+//
+//               Session session = sessionFactory.openSession();
+//               session.beginTransaction();
+//               Car c = new Car();        
+//               c = (Car) session.get(Car.class, 1);
+//               session.getTransaction().commit();
+//
+//                session = sessionFactory.openSession();
+//                //Transaction tx = session.beginTransaction();
+//                session.beginTransaction();
+//
+//                Booking b = new Booking(c, "Johan Nilsson", "gatan2", "johan@mail.se", "0713131", "false", "2000", "2017-01-16", "2017-01-16", "2017-01-21", "Kristianstad", "Kristianstad");
+//                session.save(b);
+//                session.getTransaction().commit();
                   
-                  String message = "Johan Nilsson/gatan2/axel.malmberg0002@stud.hkr.se/0713131/false/2000/2017-01-16/2017-01-16/2017-01-21/Kristianstad/Kristianstad";
+                  String message = "Johan Nilsson/gatan2/axel.malmberg0002@stud.hkr.se/0713131/false/2000/2017-01-16/2017-01-16/2017-01-21/Kristianstad/Kristianstad/Volkswagen Passat";
                   sendMessage(message);
             } catch (Exception ex) {
                 ex.printStackTrace();

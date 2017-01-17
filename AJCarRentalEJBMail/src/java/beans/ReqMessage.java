@@ -47,7 +47,9 @@ public class ReqMessage implements MessageListener {
                 String s = smessage;
                 String[] InfoArr = s.split("/");
                 String mail = InfoArr[2];
-                String body = "Hi " + InfoArr[0] + ". Your order was successfull. You can pick up your car at " + InfoArr[9] + " on " + InfoArr[6];
+                String body = "Hi " + InfoArr[0] + ". Your order was successfull. You can pick up your car at " + InfoArr[9] + " on " + InfoArr[6] + ". Details: "
+                        + "Car model: " + InfoArr[11] + ", Price: " + InfoArr[5] + ", Order confirmed at: " + InfoArr[6] + ", start date: " + InfoArr[7] + ", return date: " + InfoArr[8]
+                        + ", location of pick up: " + InfoArr[9] + ", return location: " + InfoArr[10];
                 System.out.println(mail);
                 System.out.println(body);
                 SendEmail SE = new SendEmail();
