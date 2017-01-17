@@ -9,9 +9,18 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title>Main</title>
+        <style type="text/css">
+            body {
+                background-image: url(Images/road.jpg);
+                background-repeat: no-repeat;
+                margin-top: 0px; 
+                padding-top: 0px; 
+            }
+
+        </style>
     </head>
-    <body>
-        <h1>Rent Car</h1>
+    <body >
+
     </body>
 </html>

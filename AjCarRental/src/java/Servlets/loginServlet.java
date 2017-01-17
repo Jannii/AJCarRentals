@@ -92,7 +92,7 @@ public class loginServlet extends HttpServlet {
                     try {
                         if (login.getStatus().equals("member")) {
                             System.out.println("member");
-                            request.getRequestDispatcher("homecasual.jsp").forward(request, response);
+                            request.getRequestDispatcher("homemember.jsp").forward(request, response);
                         } else if (login.getStatus().equals("admin")) {
                             request.getRequestDispatcher("homeadmin.jsp").forward(request, response);
                         }
