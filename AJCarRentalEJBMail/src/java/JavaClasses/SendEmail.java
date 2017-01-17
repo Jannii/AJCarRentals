@@ -43,7 +43,7 @@ public class SendEmail {
             mailMessage.setFrom(new InternetAddress(from));
             mailMessage.setRecipient(Message.RecipientType.TO, new InternetAddress(receipiant));
             mailMessage.setContent(body, "text/html");
-            mailMessage.setSubject("Order corfirmation");
+            mailMessage.setSubject("NoReply-Order corfirmation");
             
             Transport transport = mailSession.getTransport("smtp");
             transport.connect("smtp.gmail.com", username, password);
