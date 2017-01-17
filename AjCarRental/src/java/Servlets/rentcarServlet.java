@@ -10,6 +10,12 @@ import EntityBeans.Car;
 import Hibernate.HybernateUtil;
 import java.io.IOException;
 import java.io.PrintWriter;
+import javax.jms.ConnectionFactory;
+import javax.jms.MessageProducer;
+import javax.jms.Queue;
+import javax.jms.TextMessage;
+import javax.naming.Context;
+import javax.naming.InitialContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -38,17 +44,27 @@ public class rentcarServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet rentcarServlet</title>");
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet rentcarServlet at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
+        
+    }
+    private void sendMessage(String message) throws IOException {
+        try {
+            Context ctx = new InitialContext();
+            //ConnectionFactory     connectionFactory = (ConnectionFactory)ctx.lookup("tConnectionFactory");
+            //Queue     queue = (Queue)ctx.lookup("jms/tQueue");
+
+            System.out.println("1111111111111111111111111111");
+            ConnectionFactory connectionFactory = (ConnectionFactory) ctx.lookup("ReqConnectionFactory");
+            Queue queue = (Queue) ctx.lookup("jms/Queue");
+
+            javax.jms.Connection connection = connectionFactory.createConnection();
+            javax.jms.Session session = connection.createSession(false, javax.jms.Session.AUTO_ACKNOWLEDGE);
+            MessageProducer messageProducer = session.createProducer(queue);
+            TextMessage JMSmessage = session.createTextMessage();
+            JMSmessage.setText(message);
+            System.out.println("***** RegServlet: Sent the message to YourQueue:" + JMSmessage.getText());
+            messageProducer.send(JMSmessage);
+        } catch (Exception ex) {
+            ex.printStackTrace();
         }
     }
 
@@ -84,23 +100,25 @@ public class rentcarServlet extends HttpServlet {
                 
                 //PaymentCode goes here
                 
-                HybernateUtil hu = new HybernateUtil();
-                SessionFactory sessionFactory = hu.getSessionFactory();
-
-               Session session = sessionFactory.openSession();
-               session.beginTransaction();
-               Car c = new Car();        
-               c = (Car) session.get(Car.class, 1);
-               session.getTransaction().commit();
-
-                session = sessionFactory.openSession();
-                //Transaction tx = session.beginTransaction();
-                session.beginTransaction();
-
-                Booking b = new Booking(c, "Johan Nilsson", "gatan2", "johan@mail.se", "0713131", "false", "2000", "2017-01-16", "2017-01-16", "2017-01-21", "Kristianstad", "Kristianstad");
-                session.save(b);
-                session.getTransaction().commit();
-
+//                HybernateUtil hu = new HybernateUtil();
+//                SessionFactory sessionFactory = hu.getSessionFactory();
+//
+//               Session session = sessionFactory.openSession();
+//               session.beginTransaction();
+//               Car c = new Car();        
+//               c = (Car) session.get(Car.class, 1);
+//               session.getTransaction().commit();
+//
+//                session = sessionFactory.openSession();
+//                //Transaction tx = session.beginTransaction();
+//                session.beginTransaction();
+//
+//                Booking b = new Booking(c, "Johan Nilsson", "gatan2", "johan@mail.se", "0713131", "false", "2000", "2017-01-16", "2017-01-16", "2017-01-21", "Kristianstad", "Kristianstad");
+//                session.save(b);
+//                session.getTransaction().commit();
+                  
+                  String message = "Johan Nilsson*gatan2*johan@mail.se*0713131*false*2000*2017-01-16*2017-01-16*2017-01-21*Kristianstad*Kristianstad";
+                  sendMessage(message);
             } catch (Exception ex) {
                 ex.printStackTrace();
             }
