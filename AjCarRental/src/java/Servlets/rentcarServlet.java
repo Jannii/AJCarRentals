@@ -98,7 +98,6 @@ public class rentcarServlet extends HttpServlet {
             try {
                 //get parameters
                 
-                //PaymentCode goes here
                 
 //                HybernateUtil hu = new HybernateUtil();
 //                SessionFactory sessionFactory = hu.getSessionFactory();
