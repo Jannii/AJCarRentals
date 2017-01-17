@@ -33,7 +33,7 @@
                             <hr>
                             <h2>User credentials</h2>
                             
-                            <form action="loginServlet" method="post">
+                            
                                 <form action="addmemberServlet" method="post">
                                     Username:
                                     <input type="text" name="username">
@@ -55,8 +55,7 @@
                                     <br><br>
                                     <input type="submit" name="Submit">
                                 </form>
-                            </form>
-
+                            
                         </td>
                         <td width="15%"></td>
                     </tr>
