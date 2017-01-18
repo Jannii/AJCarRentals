@@ -115,7 +115,7 @@ public class chooseCarServlet extends HttpServlet {
             }
 
         }
-        }
+        
         
         processRequest(request, response);
     }

@@ -16,17 +16,19 @@ public class Car  implements java.io.Serializable {
      private String carType;
      private String carHome;
      private String carlocation;
+     private int dailyPrice;
      private Set bookings = new HashSet(0);
 
     public Car() {
     }
 
 	
-    public Car(String carName, String carType, String carHome, String carlocation) {
+    public Car(String carName, String carType, String carHome, String carlocation, int dailyPrice) {
         this.carName = carName;
         this.carType = carType;
         this.carHome = carHome;
         this.carlocation = carlocation;
+        this.dailyPrice = dailyPrice;
     }
     public Car(String carName, String carType, String carHome, String carlocation, Set bookings) {
        this.carName = carName;
@@ -77,6 +79,14 @@ public class Car  implements java.io.Serializable {
     
     public void setBookings(Set bookings) {
         this.bookings = bookings;
+    }
+
+    public int getDailyPrice() {
+        return dailyPrice;
+    }
+
+    public void setDailyPrice(int dailyPrice) {
+        this.dailyPrice = dailyPrice;
     }
 
 
