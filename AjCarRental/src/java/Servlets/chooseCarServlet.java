@@ -102,15 +102,21 @@ public class chooseCarServlet extends HttpServlet {
                 
                 price = price * dif;
                 System.out.println(price);
-//                request.setAttribute("carName", c.getCarName());
-//                request.setAttribute("carType", c.getCarType());
-//                request.setAttribute("carHome", c.getCarHome());
-//                request.setAttribute("carLocation", c.getCarlocation());
-//                request.setAttribute("pickUpDate", pickUpDate);
-//                request.setAttribute("dropOdDate", dropOfDate);
-//                
-//                request.setAttribute("carPrice", price);
-                request.getRequestDispatcher("paypal.jsp").forward(request, response);
+//                request.setAttribute("name", c.getCarName());
+//                request.setAttribute("addres", c.getCarName());
+//                request.setAttribute("phone", c.getCarName());
+//                request.setAttribute("email", c.getCarName());
+                
+                
+                request.setAttribute("carName", c.getCarName());
+                request.setAttribute("carType", c.getCarType());
+                request.setAttribute("carHome", c.getCarHome());
+                request.setAttribute("carLocation", c.getCarlocation());
+                request.setAttribute("pickUpDate", pickUpDate);
+                request.setAttribute("dropOdDate", dropOfDate);
+                
+                request.setAttribute("carPrice", price);
+                request.getRequestDispatcher("confirmPurchase.jsp").forward(request, response);
                 break;
             }
 

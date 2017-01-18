@@ -94,10 +94,10 @@ public class rentcarServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        if (request.getParameter("Submit") != null) {
+        //if (request.getParameter("Submit") == null) {
             try {
                 //get parameters
-                
+                System.out.println("DET FUNKAR!!!!");
                 
 //                HybernateUtil hu = new HybernateUtil();
 //                SessionFactory sessionFactory = hu.getSessionFactory();
@@ -116,12 +116,12 @@ public class rentcarServlet extends HttpServlet {
 //                session.save(b);
 //                session.getTransaction().commit();
                   
-                  String message = "Johan Nilsson/gatan2/axel.malmberg0002@stud.hkr.se/0713131/false/2000/2017-01-16/2017-01-16/2017-01-21/Kristianstad/Kristianstad/Volkswagen Passat";
-                  sendMessage(message);
+//                  String message = "Johan Nilsson/gatan2/axel.malmberg0002@stud.hkr.se/0713131/false/2000/2017-01-16/2017-01-16/2017-01-21/Kristianstad/Kristianstad/Volkswagen Passat";
+//                  sendMessage(message);
             } catch (Exception ex) {
                 ex.printStackTrace();
             }
-        }
+      //  }
         processRequest(request, response);
 
     }
