@@ -1,7 +1,6 @@
 package Servlets;
 
 import Hibernate.HybernateUtil;
-import Beans.statefulBean;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.text.DateFormat;
@@ -79,15 +78,11 @@ public class showavilableCarsServlet extends HttpServlet {
         String dropoffstring = "";
         HybernateUtil hu = null;
         ArrayList<Car> Cars = null;
-        statefulBean sfb= null;
 
         pickupstring = request.getParameter("pickupdate");
         System.out.println(pickupstring);
         dropoffstring = request.getParameter("dropoffdate");
         System.out.println(dropoffstring);
-        
-        sfb.setPickUpDate(pickupstring);
-        sfb.setDropOfDate(dropoffstring);
 
         hu = new HybernateUtil();
         SessionFactory sessionFactory = hu.getSessionFactory();
