@@ -1,4 +1,4 @@
-package EntityBeans;
+package Beans;
 // Generated 2017-jan-18 18:27:56 by Hibernate Tools 4.3.1
 
 
@@ -12,27 +12,33 @@ public class Car  implements java.io.Serializable {
 
 
      private Integer idCar;
-     private String carName;
+     private String carRegnumber;
      private String carType;
      private String carHome;
      private String carlocation;
+     private String carImage;
+     private int dailyPrice;
      private Set bookings = new HashSet(0);
 
     public Car() {
     }
 
 	
-    public Car(String carName, String carType, String carHome, String carlocation) {
-        this.carName = carName;
+    public Car(String carRegnumber, String carType, String carHome, String carlocation, String carImage, int dailyPrice) {
+        this.carRegnumber = carRegnumber;
         this.carType = carType;
         this.carHome = carHome;
         this.carlocation = carlocation;
+        this.carImage = carImage;
+        this.dailyPrice = dailyPrice;
     }
-    public Car(String carName, String carType, String carHome, String carlocation, Set bookings) {
-       this.carName = carName;
+    public Car(String carRegnumber, String carType, String carHome, String carlocation, String carImage, int dailyPrice, Set bookings) {
+       this.carRegnumber = carRegnumber;
        this.carType = carType;
        this.carHome = carHome;
        this.carlocation = carlocation;
+       this.carImage = carImage;
+       this.dailyPrice = dailyPrice;
        this.bookings = bookings;
     }
    
@@ -43,12 +49,12 @@ public class Car  implements java.io.Serializable {
     public void setIdCar(Integer idCar) {
         this.idCar = idCar;
     }
-    public String getCarName() {
-        return this.carName;
+    public String getCarRegnumber() {
+        return this.carRegnumber;
     }
     
-    public void setCarName(String carName) {
-        this.carName = carName;
+    public void setCarRegnumber(String carRegnumber) {
+        this.carRegnumber = carRegnumber;
     }
     public String getCarType() {
         return this.carType;
@@ -70,6 +76,20 @@ public class Car  implements java.io.Serializable {
     
     public void setCarlocation(String carlocation) {
         this.carlocation = carlocation;
+    }
+    public String getCarImage() {
+        return this.carImage;
+    }
+    
+    public void setCarImage(String carImage) {
+        this.carImage = carImage;
+    }
+    public int getDailyPrice() {
+        return this.dailyPrice;
+    }
+    
+    public void setDailyPrice(int dailyPrice) {
+        this.dailyPrice = dailyPrice;
     }
     public Set getBookings() {
         return this.bookings;

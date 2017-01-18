@@ -1,4 +1,4 @@
-package EntityBeans;
+package Beans;
 // Generated 2017-jan-18 18:27:56 by Hibernate Tools 4.3.1
 
 

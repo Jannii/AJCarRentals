@@ -3,10 +3,10 @@
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <!-- Generated 2017-jan-18 18:27:57 by Hibernate Tools 4.3.1 -->
 <hibernate-mapping>
-    <class name="EntityBeans.Office" table="office" catalog="ajcarrental">
+    <class name="Beans.Office" table="office" catalog="ajcarrental" optimistic-lock="version">
         <id name="idOffice" type="java.lang.Integer">
             <column name="idOffice" />
-            <generator class="identity"></generator>
+            <generator class="identity" />
         </id>
         <property name="officeName" type="string">
             <column name="OfficeName" length="45" not-null="true" />
@@ -27,7 +27,7 @@
             <key>
                 <column name="Office_idOffice" not-null="true" />
             </key>
-            <many-to-many entity-name="EntityBeans.Booking">
+            <many-to-many entity-name="Beans.Booking">
                 <column name="Booking_idBooking" not-null="true" />
             </many-to-many>
         </set>

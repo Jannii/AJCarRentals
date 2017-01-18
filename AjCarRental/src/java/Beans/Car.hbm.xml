@@ -3,13 +3,13 @@
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <!-- Generated 2017-jan-18 18:27:57 by Hibernate Tools 4.3.1 -->
 <hibernate-mapping>
-    <class name="EntityBeans.Car" table="car" catalog="ajcarrental">
+    <class name="Beans.Car" table="car" catalog="ajcarrental" optimistic-lock="version">
         <id name="idCar" type="java.lang.Integer">
             <column name="idCar" />
-            <generator class="identity"></generator>
+            <generator class="identity" />
         </id>
-        <property name="carName" type="string">
-            <column name="CarName" length="45" not-null="true" />
+        <property name="carRegnumber" type="string">
+            <column name="CarRegnumber" length="45" not-null="true" />
         </property>
         <property name="carType" type="string">
             <column name="CarType" length="45" not-null="true" />
@@ -20,11 +20,17 @@
         <property name="carlocation" type="string">
             <column name="Carlocation" length="45" not-null="true" />
         </property>
+        <property name="carImage" type="string">
+            <column name="carImage" length="45" not-null="true" />
+        </property>
+        <property name="dailyPrice" type="int">
+            <column name="dailyPrice" not-null="true" />
+        </property>
         <set name="bookings" table="booking" inverse="true" lazy="true" fetch="select">
             <key>
                 <column name="Car_idCar" not-null="true" />
             </key>
-            <one-to-many class="EntityBeans.Booking" />
+            <one-to-many class="Beans.Booking" />
         </set>
     </class>
 </hibernate-mapping>

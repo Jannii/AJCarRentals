@@ -3,14 +3,14 @@
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <!-- Generated 2017-jan-18 18:27:57 by Hibernate Tools 4.3.1 -->
 <hibernate-mapping>
-    <class name="EntityBeans.User" table="user" catalog="ajcarrental">
+    <class name="Beans.User" table="user" catalog="ajcarrental" optimistic-lock="version">
         <id name="loginIdLogin" type="java.lang.Integer">
             <column name="Login_idLogin" />
             <generator class="foreign">
                 <param name="property">login</param>
             </generator>
         </id>
-        <one-to-one name="login" class="EntityBeans.Login" constrained="true"></one-to-one>
+        <one-to-one name="login" class="Beans.Login" constrained="true"></one-to-one>
         <property name="name" type="string">
             <column name="Name" length="45" not-null="true" />
         </property>
