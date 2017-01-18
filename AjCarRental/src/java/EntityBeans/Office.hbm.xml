@@ -14,11 +14,8 @@
         <property name="officeAdress" type="string">
             <column name="OfficeAdress" length="45" not-null="true" />
         </property>
-        <property name="officeX" type="string">
-            <column name="OfficeX" length="45" not-null="true" />
-        </property>
-        <property name="officeY" type="string">
-            <column name="OfficeY" length="45" not-null="true" />
+        <property name="officeLocation" type="string">
+            <column name="OfficeLocation" length="45" not-null="true" />
         </property>
         <property name="officePhone" type="string">
             <column name="OfficePhone" length="45" not-null="true" />
