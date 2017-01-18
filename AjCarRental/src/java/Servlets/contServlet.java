@@ -53,7 +53,23 @@ public class contServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
-        request.getRequestDispatcher("Test.jsp").forward(request, response);
+        if (request.getParameter("cont") != null) {
+            HybernateUtil hu = new HybernateUtil();
+            SessionFactory sessionFactory = hu.getSessionFactory();
+            Session session = sessionFactory.getCurrentSession();
+            Transaction tx = session.beginTransaction();
+            System.out.println("cretaied sessions");
+
+            String queryString = "SELECT * FROM Office";
+
+            Query query = session.createSQLQuery(queryString);
+            System.out.println("Query::::" + query.getQueryString().toString());;
+            request.setAttribute("Loc", query.list());
+            request.getRequestDispatcher("homecasual.jsp").forward(request, response);
+            tx.commit();
+            System.out.println("txcommit.............................................................................");
+            hu.close();
+        }
     }
 
     /**
