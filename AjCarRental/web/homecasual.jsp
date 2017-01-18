@@ -31,9 +31,9 @@
             $(function () {
                 $("#dropoffdatepicker").datepicker();
             });
-            var location =[];
+            var location ;
             var map;
-            var l = [];
+            var l ;
             
             function myMap() {
 
@@ -55,15 +55,15 @@
 
                 var marker, i;
 
-                for (i = 0; i < location.length; i++) {
+                for (i = 0; i < locations.length; i++) {
                     marker = new google.maps.Marker({
-                        position: new google.maps.LatLng(location[i][3], location[i][4]),
+                        position: new google.maps.LatLng(locations[i][3], locations[i][4]),
                         map: map
                     });
 
                     google.maps.event.addListener(marker, 'click', (function (marker, i) {
                         return function () {
-                            infowindow.setContent(location[i][0]);
+                            infowindow.setContent(locations[i][0]);
                             infowindow.open(map, marker);
                         }
                     })(marker, i));
