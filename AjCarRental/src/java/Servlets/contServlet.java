@@ -1,16 +1,13 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package Servlets;
 
 import Hibernate.HybernateUtil;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -20,15 +17,13 @@ import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
-import EntityBeans.Car;
-import java.util.Iterator;
 
 /**
  *
  * @author Johan Nilsson
  */
-@WebServlet(name = "showavilableCarsServlet", urlPatterns = {"/showavilableCarsServlet"})
-public class showavilableCarsServlet extends HttpServlet {
+@WebServlet(name = "contServlet", urlPatterns = {"/contServlet"})
+public class contServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -72,36 +67,23 @@ public class showavilableCarsServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
-        Transaction tx = null;
-        Session session = null;
-        String pickupstring = "";
-        String dropoffstring = "";
-        HybernateUtil hu = null;
-        ArrayList<Car> Cars = null;
+        if (request.getParameter("cont") != null) {
+            HybernateUtil hu = new HybernateUtil();
+            SessionFactory sessionFactory = hu.getSessionFactory();
+            Session session = sessionFactory.getCurrentSession();
+            Transaction tx = session.beginTransaction();
+            System.out.println("cretaied sessions");
 
-        pickupstring = request.getParameter("pickupdate");
-        System.out.println(pickupstring);
-        dropoffstring = request.getParameter("dropoffdate");
-        System.out.println(dropoffstring);
+            String queryString = "SELECT * FROM Office";
 
-        hu = new HybernateUtil();
-        SessionFactory sessionFactory = hu.getSessionFactory();
-        session = sessionFactory.getCurrentSession();
-        tx = session.beginTransaction();
-        System.out.println("cretaied sessions");
-
-        String queryString = "SELECT * FROM car WHERE idCar not in (SELECT Car_idCar FROM BOOKING WHERE startdate BETWEEN :startdate  AND :returndate)";
-
-        Query query = session.createSQLQuery(queryString);
-        System.out.println("Query::::" + query.getQueryString().toString());
-        query.setParameter("startdate", pickupstring);
-        query.setParameter("returndate", dropoffstring);
-        request.setAttribute("Carlist", query.list());
-        request.getRequestDispatcher("listcars.jsp").forward(request, response);
-        tx.commit();
-        System.out.println("txcommit.............................................................................");
-        hu.close();
-
+            Query query = session.createSQLQuery(queryString);
+            System.out.println("Query::::" + query.getQueryString().toString());;
+            request.setAttribute("Loc", query.list());
+            request.getRequestDispatcher("homecasual.jsp").forward(request, response);
+            tx.commit();
+            System.out.println("txcommit.............................................................................");
+            hu.close();
+        }
     }
 
     /**

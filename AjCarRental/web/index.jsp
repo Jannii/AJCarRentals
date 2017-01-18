@@ -12,16 +12,10 @@
         <title>Login</title>
     </head>
     <body>
-        <h1>Login</h1>
-        <hr>
-        <h2>User credentials</h2>
-        <form action="loginServlet" method="post">
-            Username:
-            <input type="text" name="username"><br><br>
-            Password:
-            <input type="password" name="password">
-            <br><br>
-            <input type="submit" name="Submit">
+        <form action="contServlet" method="post">
+            <h1 align="center" valign="middle">Welcome to AJ CarRentals</h1>
+            <input type="submit" name="cont" value="Continue"/>
+
         </form>
     </body>
 </html>
