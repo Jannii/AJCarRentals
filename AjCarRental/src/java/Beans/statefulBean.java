@@ -5,35 +5,87 @@
  */
 package Beans;
 
-import javax.ejb.Stateful;
-
 /**
  *
  * @author bumblebee
  */
-@Stateful
 public class statefulBean {
     
-    String pickUpDate;
-    String dropOfDate;
+    public static String pickUpDate;
+    public static String dropOfDate;
+    public static String name;
+    public static String addres;
+    public static String mail;
+    public static String paymentStatus;
+    public static String pickUpLocation;
+    public static String dropOfLocation;
 
-    public String getPickUpDate() {
+    
+    
+
+    public static String getPickUpDate() {
         return pickUpDate;
     }
 
-    public void setPickUpDate(String pickUpDate) {
-        this.pickUpDate = pickUpDate;
+    public static void setPickUpDate(String pickUpDate) {
+        statefulBean.pickUpDate = pickUpDate;
     }
 
-    public String getDropOfDate() {
+    public static String getDropOfDate() {
         return dropOfDate;
     }
 
-    public void setDropOfDate(String dropOfDate) {
-        this.dropOfDate = dropOfDate;
+    public static void setDropOfDate(String dropOfDate) {
+        statefulBean.dropOfDate = dropOfDate;
+    }
+
+    public static String getName() {
+        return name;
+    }
+
+    public static void setName(String name) {
+        statefulBean.name = name;
+    }
+
+    public static String getAddres() {
+        return addres;
+    }
+
+    public static void setAddres(String addres) {
+        statefulBean.addres = addres;
+    }
+
+    public static String getMail() {
+        return mail;
+    }
+
+    public static void setMail(String mail) {
+        statefulBean.mail = mail;
+    }
+
+    public static String getPaymentStatus() {
+        return paymentStatus;
+    }
+
+    public static void setPaymentStatus(String paymentStatus) {
+        statefulBean.paymentStatus = paymentStatus;
+    }
+
+    public static String getPickUpLocation() {
+        return pickUpLocation;
+    }
+
+    public static void setPickUpLocation(String pickUpLocation) {
+        statefulBean.pickUpLocation = pickUpLocation;
+    }
+
+    public static String getDropOfLocation() {
+        return dropOfLocation;
+    }
+
+    public static void setDropOfLocation(String dropOfLocation) {
+        statefulBean.dropOfLocation = dropOfLocation;
     }
     
-
-    // Add business logic below. (Right-click in editor and choose
-    // "Insert Code > Add Business Method")
+    
 }

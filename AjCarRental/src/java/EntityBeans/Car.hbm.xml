@@ -20,6 +20,12 @@
         <property name="carlocation" type="string">
             <column name="Carlocation" length="45" not-null="true" />
         </property>
+        <property name="carImage" type="string">
+            <column name="carImage" length="45" not-null="true" />
+        </property>
+        <property name="dailyPrice" type="java.lang.Integer">
+            <column name="dailyPrice" length="11" not-null="true" />
+        </property>
         <set name="bookings" table="booking" inverse="true" lazy="true" fetch="select">
             <key>
                 <column name="Car_idCar" not-null="true" />

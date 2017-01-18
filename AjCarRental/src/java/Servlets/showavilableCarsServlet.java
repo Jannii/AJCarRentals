@@ -79,15 +79,20 @@ public class showavilableCarsServlet extends HttpServlet {
         String dropoffstring = "";
         HybernateUtil hu = null;
         ArrayList<Car> Cars = null;
-        statefulBean sfb= null;
+        
 
         pickupstring = request.getParameter("pickupdate");
         System.out.println(pickupstring);
         dropoffstring = request.getParameter("dropoffdate");
         System.out.println(dropoffstring);
         
+        statefulBean sfb = new statefulBean();
+
         sfb.setPickUpDate(pickupstring);
         sfb.setDropOfDate(dropoffstring);
+
+        
+
 
         hu = new HybernateUtil();
         SessionFactory sessionFactory = hu.getSessionFactory();

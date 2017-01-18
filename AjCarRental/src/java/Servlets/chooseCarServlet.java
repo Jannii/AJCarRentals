@@ -10,10 +10,8 @@ import EntityBeans.Car;
 import Hibernate.HybernateUtil;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.text.DateFormat;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
+
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletException;
@@ -23,6 +21,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.joda.time.DateTime;
+import org.joda.time.Days;
+import org.joda.time.format.DateTimeFormat;
+import org.joda.time.format.DateTimeFormatter;
 
 /**
  *
@@ -89,26 +91,28 @@ public class chooseCarServlet extends HttpServlet {
                 session.getTransaction().commit();
 
                 int price = c.getDailyPrice();
-
                 statefulBean sfb = new statefulBean();
                 String pickUpDate = sfb.getPickUpDate();
                 String dropOfDate = sfb.getDropOfDate();
-                Date startDate;
-                Date endDate;
-                DateFormat df = new SimpleDateFormat("yyyy-mm-dd");
-                try {
-                    startDate = df.parse(pickUpDate);
-                    endDate = df.parse(dropOfDate);
-                } catch (ParseException ex) {
-                    Logger.getLogger(chooseCarServlet.class.getName()).log(Level.SEVERE, null, ex);
-                }
+                System.out.println(pickUpDate + " " + dropOfDate);
+                DateTimeFormatter formatter = DateTimeFormat.forPattern("MM/dd/yyyy");
+                DateTime first = formatter.parseDateTime(pickUpDate);
+                DateTime second = formatter.parseDateTime(dropOfDate);
+                int dif = 0;
+                dif = Days.daysBetween(first, second).getDays();
                 
-
-                request.setAttribute("carName", c.getCarName());
-                request.setAttribute("carType", c.getCarType());
-                request.setAttribute("carHome", c.getCarHome());
-                request.setAttribute("carLocation", c.getCarlocation());
-                request.setAttribute("carPrice", price);
+                System.out.println(dif);
+                
+                price = price * dif;
+                System.out.println(price);
+//                request.setAttribute("carName", c.getCarName());
+//                request.setAttribute("carType", c.getCarType());
+//                request.setAttribute("carHome", c.getCarHome());
+//                request.setAttribute("carLocation", c.getCarlocation());
+//                request.setAttribute("pickUpDate", pickUpDate);
+//                request.setAttribute("dropOdDate", dropOfDate);
+//                
+//                request.setAttribute("carPrice", price);
                 request.getRequestDispatcher("paypal.jsp").forward(request, response);
                 break;
             }
