@@ -12,7 +12,7 @@
         <title>Login</title>
     </head>
     <body>
-        <form action="contServlet" method="post">
+        <form action="contServlet" method="POST">
             <h1 align="center" valign="middle">Welcome to AJ CarRentals</h1>
             <input type="submit" name="cont" value="Continue"/>
 
