@@ -4,6 +4,7 @@
     Author     : Johan Nilsson
 --%>
 
+<%@page import="Beans.statefulBean"%>
 <%@page import="EntityBeans.Office"%>
 <%@page import="EntityBeans.Car"%>
 <%@page import="java.util.Iterator"%>
@@ -86,8 +87,9 @@
                         <th width = "70%">
                             <label align ="center">AJ Car Rentals</label>
                         </th>
-                        <th width = "15%">Hello <% 
-                            Beans.Userinfo.class.getName();%>
+                        
+                        <th width = "15%"> <%String s= statefulBean.getName();
+                               out.print(s); %>
                         </th>
                     </tr>
                 </thead>

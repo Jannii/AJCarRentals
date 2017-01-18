@@ -24,6 +24,7 @@ import java.util.List;
 import org.hibernate.Query;
 import Beans.Userinfo;
 import java.util.LinkedList;
+import Beans.statefulBean;
 
 /**
  *
@@ -79,7 +80,7 @@ public class loginServlet extends HttpServlet {
             Userinfo ui = new Userinfo();
             HybernateUtil hu = new HybernateUtil();
             SessionFactory sessionFactory = hu.getSessionFactory();
-            
+
             Session session = sessionFactory.getCurrentSession();
             session.beginTransaction();
 
@@ -90,61 +91,78 @@ public class loginServlet extends HttpServlet {
             session.getTransaction().commit();
 
             int id = loginlist.get(0).getIdLogin();
+
+            session = sessionFactory.openSession();
+            session.beginTransaction();
+            User u = new User();
+            u = (User) session.get(User.class, id);
+            session.getTransaction().commit();
+            
+            statefulBean stb = new statefulBean();
+            stb.setName(u.getName());
+            stb.setAddres(u.getAdress());
+            stb.setMail(u.getEmail());
+            stb.setPhone(u.getPhone());
             
             
 
-               session = sessionFactory.openSession();
-               session.beginTransaction();
-               User u = new User();        
-               u = (User) session.get(User.class, id);
-               session.getTransaction().commit();
-               System.out.println(u.getName());
+            for (EntityBeans.Login login : loginlist) {
+                System.out.println("in for loop");
 
+                if (login.getUsername().equals(user) && login.getUserpass().equals(pass)) {
+                    System.out.println("Success");
+                    try {
 
-        for (EntityBeans.Login login : loginlist) {
-            System.out.println("in for loop");
+                        if (login.getStatus().equals("member")) {
+                            session = sessionFactory.getCurrentSession();
+                            session.beginTransaction();
+                            queryString = "SELECT * FROM Office";
+                            query = session.createSQLQuery(queryString);
+                            System.out.println("Query::::" + query.getQueryString().toString());;
+                            request.setAttribute("Loc", query.list());
+                            System.out.println("member");
+                            request.getRequestDispatcher("homemember.jsp").forward(request, response);
+                        } else if (login.getStatus().equals("admin")) {
+                            session = sessionFactory.getCurrentSession();
+                            session.beginTransaction();
+                            queryString = "SELECT * FROM Office";
+                            query = session.createSQLQuery(queryString);
+                            System.out.println("Query::::" + query.getQueryString().toString());;
+                            request.setAttribute("Loc", query.list());
+                            System.out.println("member");
+                            request.getRequestDispatcher("homeadmin.jsp").forward(request, response);
+                        }
 
-            if (login.getUsername().equals(user) && login.getUserpass().equals(pass)) {
-                System.out.println("Success");
-                try {
-
-                    if (login.getStatus().equals("member")) {
-                        System.out.println("member");
-                        request.getRequestDispatcher("homemember.jsp").forward(request, response);
-                    } else if (login.getStatus().equals("admin")) {
-                        request.getRequestDispatcher("homeadmin.jsp").forward(request, response);
+                    } catch (Exception ex) {
+                        ex.printStackTrace();
                     }
 
-                } catch (Exception ex) {
-                    ex.printStackTrace();
+                } else {
+                    String error = "Your Username and/or Password dont exist";
+                    System.out.println("redirect to login in for");
+                    request.setAttribute("error", error);
+                    request.getRequestDispatcher("payment.jsp").forward(request, response);
                 }
-
-            } else {
-                String error = "Your Username and/or Password dont exist";
-                System.out.println("redirect to login in for");
-                request.setAttribute("error", error);
-                request.getRequestDispatcher("payment.jsp").forward(request, response);
             }
-        }
-        if (loginlist.size() == 0) {
-            String error = "Your Username and/or Password dont exist";
-            System.out.println("redirekt to login utside for");
-            request.setAttribute("error", error);
-            request.getRequestDispatcher("login.jsp").forward(request, response);
-        }
+            if (loginlist.size() == 0) {
+                String error = "Your Username and/or Password dont exist";
+                System.out.println("redirekt to login utside for");
+                request.setAttribute("error", error);
+                request.getRequestDispatcher("login.jsp").forward(request, response);
+            }
 //        hu.close();
+        }
+
+        processRequest(request, response);
     }
 
-    processRequest(request, response);
-}
-
-/**
- * Returns a short description of the servlet.
- *
- * @return a String containing servlet description
- */
-@Override
-        public String getServletInfo() {
+    /**
+     * Returns a short description of the servlet.
+     *
+     * @return a String containing servlet description
+     */
+    @Override
+    public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
 

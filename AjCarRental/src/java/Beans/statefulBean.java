@@ -16,6 +16,7 @@ public class statefulBean {
     public static String name;
     public static String addres;
     public static String mail;
+    public static String phone;
     public static String paymentStatus;
     public static String pickUpLocation;
     public static String dropOfLocation;
@@ -85,6 +86,14 @@ public class statefulBean {
 
     public static void setDropOfLocation(String dropOfLocation) {
         statefulBean.dropOfLocation = dropOfLocation;
+    }
+
+    public static String getPhone() {
+        return phone;
+    }
+
+    public static void setPhone(String phone) {
+        statefulBean.phone = phone;
     }
     
     
