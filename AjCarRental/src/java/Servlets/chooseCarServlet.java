@@ -5,6 +5,7 @@
  */
 package Servlets;
 
+import Beans.statefulBean;
 import EntityBeans.Car;
 import Hibernate.HybernateUtil;
 import java.io.IOException;
@@ -82,6 +83,10 @@ public class chooseCarServlet extends HttpServlet {
             session.getTransaction().commit();
             
             int price = c.getDailyPrice();
+            
+            statefulBean sfb = new statefulBean();
+            String pickUpDate = sfb.getPickUpDate();
+            String dropOfDate = sfb.getDropOfDate();
             
             
             request.setAttribute("carName", c.getCarName());
