@@ -22,7 +22,7 @@
     </context-param>
     <context-param>
         <param-name>returnurl</param-name>
-        <param-value>http://localhost:8080/AjCarRental/autosave.jsp</param-value>
+        <param-value>http://localhost:8080/AjCarRental/payment.jsp</param-value>
     </context-param>
     <context-param>
         <param-name>currencycode</param-name>
