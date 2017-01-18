@@ -1,5 +1,5 @@
 package EntityBeans;
-// Generated 2017-jan-16 15:21:22 by Hibernate Tools 4.3.1
+// Generated 2017-jan-18 18:27:56 by Hibernate Tools 4.3.1
 
 
 import java.util.HashSet;
@@ -16,25 +16,17 @@ public class Car  implements java.io.Serializable {
      private String carType;
      private String carHome;
      private String carlocation;
-     private String carImage;
-
-    
-     private int dailyPrice;
-
-    
      private Set bookings = new HashSet(0);
 
     public Car() {
     }
 
 	
-    public Car(String carName, String carType, String carHome, String carlocation, String carImage, int dailyPrice) {
+    public Car(String carName, String carType, String carHome, String carlocation) {
         this.carName = carName;
         this.carType = carType;
         this.carHome = carHome;
         this.carlocation = carlocation;
-        this.carImage = carImage;
-        this.dailyPrice = dailyPrice;
     }
     public Car(String carName, String carType, String carHome, String carlocation, Set bookings) {
        this.carName = carName;
@@ -85,20 +77,6 @@ public class Car  implements java.io.Serializable {
     
     public void setBookings(Set bookings) {
         this.bookings = bookings;
-    }
-    public String getCarImage() {
-        return carImage;
-    }
-
-    public void setCarImage(String carImage) {
-        this.carImage = carImage;
-    }
-    public int getDailyPrice() {
-        return dailyPrice;
-    }
-
-    public void setDailyPrice(int dailyPrice) {
-        this.dailyPrice = dailyPrice;
     }
 
 

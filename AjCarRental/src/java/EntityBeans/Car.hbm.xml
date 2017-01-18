@@ -1,12 +1,12 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<!-- Generated 2017-jan-16 15:21:23 by Hibernate Tools 4.3.1 -->
+<!-- Generated 2017-jan-18 18:27:57 by Hibernate Tools 4.3.1 -->
 <hibernate-mapping>
-    <class name="EntityBeans.Car" table="car" catalog="ajcarrental" optimistic-lock="version">
+    <class name="EntityBeans.Car" table="car" catalog="ajcarrental">
         <id name="idCar" type="java.lang.Integer">
             <column name="idCar" />
-            <generator class="identity" />
+            <generator class="identity"></generator>
         </id>
         <property name="carName" type="string">
             <column name="CarName" length="45" not-null="true" />

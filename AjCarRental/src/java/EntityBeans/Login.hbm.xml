@@ -1,20 +1,19 @@
-
+<?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<!-- Generated 2017-jan-16 15:21:23 by Hibernate Tools 4.3.1 -->
+<!-- Generated 2017-jan-18 18:27:57 by Hibernate Tools 4.3.1 -->
 <hibernate-mapping>
-    <class name="EntityBeans.Login" table="login" catalog="ajcarrental" optimistic-lock="version">
+    <class name="EntityBeans.Login" table="login" catalog="ajcarrental">
         <id name="idLogin" type="java.lang.Integer">
             <column name="idLogin" />
-            <generator class="increment" />
+            <generator class="increment"></generator>
         </id>
-        <property name="username" type="string" >
-           <column name="username" length="45" not-null="true" unique="true" />
+        <property name="username" type="string">
+            <column name="username" length="45" not-null="true" unique="true" />
         </property>
         <property name="userpass" type="string">
             <column name="userpass" length="45" not-null="true" />
         </property>
-        
         <property name="status" type="string">
             <column name="status" length="10" not-null="true" />
         </property>

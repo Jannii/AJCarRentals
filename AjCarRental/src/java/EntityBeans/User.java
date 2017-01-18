@@ -1,5 +1,5 @@
 package EntityBeans;
-// Generated 2017-jan-16 15:21:22 by Hibernate Tools 4.3.1
+// Generated 2017-jan-18 18:27:56 by Hibernate Tools 4.3.1
 
 
 
@@ -11,6 +11,7 @@ public class User  implements java.io.Serializable {
 
      private Integer loginIdLogin;
      private Login login;
+     private User user;
      private String name;
      private String adress;
      private String email;
@@ -20,6 +21,27 @@ public class User  implements java.io.Serializable {
     }
 
     public User(Login login, String name, String adress, String email, String phone) {
+       this.login = login;
+       this.name = name;
+       this.adress = adress;
+       this.email = email;
+       this.phone = phone;
+    }
+    public User(String name, String adress, String email, String phone) {
+       
+       this.name = name;
+       this.adress = adress;
+       this.email = email;
+       this.phone = phone;
+    }
+    public User(String name, String adress, String email, String phone,User user) {
+       this.user = user;
+       this.name = name;
+       this.adress = adress;
+       this.email = email;
+       this.phone = phone;
+    }
+    public User(String name, String adress, String email, String phone,Login login) {
        this.login = login;
        this.name = name;
        this.adress = adress;
@@ -68,6 +90,14 @@ public class User  implements java.io.Serializable {
     
     public void setPhone(String phone) {
         this.phone = phone;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 
 

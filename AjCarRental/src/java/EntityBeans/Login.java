@@ -1,5 +1,5 @@
 package EntityBeans;
-// Generated 2017-jan-16 15:21:22 by Hibernate Tools 4.3.1
+// Generated 2017-jan-18 18:27:56 by Hibernate Tools 4.3.1
 
 
 
@@ -13,8 +13,6 @@ public class Login  implements java.io.Serializable {
      private String username;
      private String userpass;
      private String status;
-
-    
      private User user;
 
     public Login() {
@@ -54,6 +52,13 @@ public class Login  implements java.io.Serializable {
     public void setUserpass(String userpass) {
         this.userpass = userpass;
     }
+    public String getStatus() {
+        return this.status;
+    }
+    
+    public void setStatus(String status) {
+        this.status = status;
+    }
     public User getUser() {
         return this.user;
     }
@@ -61,15 +66,8 @@ public class Login  implements java.io.Serializable {
     public void setUser(User user) {
         this.user = user;
     }
-    public String getStatus() {
-        return status;
-    }
 
-    public void setStatus(String status) {
-        this.status = status;
-    }
 
-     
 
 
 }
