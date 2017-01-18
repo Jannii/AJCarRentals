@@ -31,8 +31,12 @@
             $(function () {
                 $("#dropoffdatepicker").datepicker();
             });
+            var location =[];
             var map;
+            var l = [];
+            
             function myMap() {
+
                 var locations = [
                     ['Bondi Beach', -33.890542, 151.274856, 4],
                     ['Coogee Beach', -33.923036, 151.259052, 5],
@@ -42,8 +46,8 @@
                 ];
 
                 var map = new google.maps.Map(document.getElementById('map'), {
-                    zoom: 10,
-                    center: new google.maps.LatLng(-33.92, 151.25),
+                    zoom: 1,
+                    center: new google.maps.LatLng(0.0, 0.0),
                     mapTypeId: google.maps.MapTypeId.ROADMAP
                 });
 
@@ -51,15 +55,15 @@
 
                 var marker, i;
 
-                for (i = 0; i < locations.length; i++) {
+                for (i = 0; i < location.length; i++) {
                     marker = new google.maps.Marker({
-                        position: new google.maps.LatLng(locations[i][1], locations[i][2]),
+                        position: new google.maps.LatLng(location[i][3], location[i][4]),
                         map: map
                     });
 
                     google.maps.event.addListener(marker, 'click', (function (marker, i) {
                         return function () {
-                            infowindow.setContent(locations[i][0]);
+                            infowindow.setContent(location[i][0]);
                             infowindow.open(map, marker);
                         }
                     })(marker, i));
@@ -105,6 +109,33 @@
                                     </tr>
                                     <tr>
                                         <td>
+                                            <script>
+                                                <%
+                                                    List<Office> list = (List<Office>) request.getAttribute("Loc");
+                                                    Iterator itr = list.iterator();
+                                                    while (itr.hasNext()) {
+                                                        Object[] obj = (Object[]) itr.next();
+                                                        String id = String.valueOf(obj[0]);
+                                                        String name = String.valueOf(obj[1]);
+                                                        String address = String.valueOf(obj[2]);
+                                                        String locX = String.valueOf(obj[3]);
+                                                        String locY = String.valueOf(obj[4]);
+                                                        String phone = String.valueOf(obj[5]);
+                                                        System.out.println(locX);
+                                                %>
+                                                l.push(<%=id%>,<%=name%>,<%=address%>,<%=locX%>,<%=locY%>,<%=phone%>);
+                                                location.push(l);
+                                                for (int i = 0: i < location.size:i++)
+                                                {
+                                                    console.log("location" + location[0]);
+                                                }
+
+                                                <%}
+                                                %>
+                                                    
+                                            </script>
+
+
                                             <div id="map" style="width:100%;height:500px"></div>
                                             <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD0GAEHADATv490rWxEHruelPDPFaWTqHc&callback=myMap"></script>
                                         </td>
