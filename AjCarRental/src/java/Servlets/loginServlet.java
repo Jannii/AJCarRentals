@@ -22,6 +22,7 @@ import Hibernate.HybernateUtil;
 import static java.util.Collections.list;
 import java.util.List;
 import org.hibernate.Query;
+import Beans.Userinfo;
 
 /**
  *
@@ -74,7 +75,7 @@ public class loginServlet extends HttpServlet {
         if (request.getParameter("Submit") != null) {
             String user = request.getParameter("username");
             String pass = request.getParameter("password");
-
+            Userinfo u = new Userinfo();
             HybernateUtil hu = new HybernateUtil();
             SessionFactory sessionFactory = hu.getSessionFactory();
             Session session = sessionFactory.getCurrentSession();
@@ -87,15 +88,30 @@ public class loginServlet extends HttpServlet {
             System.out.println("cretaing list");
             for (EntityBeans.Login login : loginlist) {
                 System.out.println("in for loop");
+                
                 if (login.getUsername().equals(user) && login.getUserpass().equals(pass)) {
                     System.out.println("Success");
                     try {
+                        int  id = Integer.parseInt(loginlist.get(0).toString());
+                        SessionFactory sessionFactory1 = hu.getSessionFactory();
+                        Session session1 = sessionFactory1.getCurrentSession();
+                        Transaction tx1 = session1.beginTransaction();
+                        String queryString1 = "Select * from user where Login_idLogin= :id";
+                        Query query1 = session1.createSQLQuery(queryString);
+                        query.setParameter("id", id);
+                        List<EntityBeans.User> User = query.list();
+                        
+                        u.setName(User.get(1).toString());
+                        u.setAdress(User.get(2).toString());
+                        u.setEmail(User.get(3).toString());
+                        u.setPhone(User.get(4).toString());
                         if (login.getStatus().equals("member")) {
                             System.out.println("member");
                             request.getRequestDispatcher("homemember.jsp").forward(request, response);
                         } else if (login.getStatus().equals("admin")) {
                             request.getRequestDispatcher("homeadmin.jsp").forward(request, response);
                         }
+
                     } catch (Exception ex) {
                         ex.printStackTrace();
                     }
