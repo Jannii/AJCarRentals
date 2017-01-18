@@ -53,10 +53,5 @@ Contributor(s):
     <mapping resource="EntityBeans/Car.hbm.xml"/>
     <mapping resource="EntityBeans/Office.hbm.xml"/>
     <mapping resource="EntityBeans/Booking.hbm.xml"/>
-    <mapping resource="Beans/Login.hbm.xml"/>
-    <mapping resource="Beans/User.hbm.xml"/>
-    <mapping resource="Beans/Car.hbm.xml"/>
-    <mapping resource="Beans/Office.hbm.xml"/>
-    <mapping resource="Beans/Booking.hbm.xml"/>
   </session-factory>
 </hibernate-configuration>
