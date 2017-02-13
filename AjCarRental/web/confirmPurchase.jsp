@@ -47,6 +47,10 @@
             String price = request.getAttribute("carPrice").toString();
             String carName = request.getAttribute("carName").toString();
             %>
+            Your Name: <input type="Text"/><br>
+            Your Adress:<input type="Text"/><br>
+            Your Email:<input type="Text"/><br>
+            Your Phone<input type="Text"/><br>
         <h1>PAY UP BITCH</h1>
         <input type="hidden" name="upload" value="1"/>
         <input type="hidden" name="return" value="${initParam['returnurl']}"/>
