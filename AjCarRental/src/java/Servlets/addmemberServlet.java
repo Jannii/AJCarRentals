@@ -124,7 +124,7 @@ public class addmemberServlet extends HttpServlet {
         }
         if (request.getParameter("okbtn") != null) {
             
-            request.getRequestDispatcher("homemember.jsp").forward(request, response);
+            request.getRequestDispatcher("index.jsp").forward(request, response);
         }
     }
 

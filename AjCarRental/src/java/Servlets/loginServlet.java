@@ -84,8 +84,8 @@ public class loginServlet extends HttpServlet {
             Session session = sessionFactory.getCurrentSession();
             session.beginTransaction();
 
-            String queryString = "Select l from Login l where l.username= :user";
-            Query query = session.createQuery(queryString);
+            String queryString = "Select * from Login where Login.username= :user";
+            Query query = session.createSQLQuery(queryString);
             query.setParameter("user", user);
             List<EntityBeans.Login> loginlist = query.list();
             session.getTransaction().commit();
