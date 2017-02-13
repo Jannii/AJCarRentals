@@ -109,8 +109,8 @@ public class rentcarServlet extends HttpServlet {
             ex.printStackTrace();
         }
         //  }
-        statefulBean sfb = new statefulBean();
-        System.out.println("YOYOYOYOYOYOYOYOYOYOYOYOYOYOYO" + sfb.getCarName() + " " + sfb.getCarType());
+        statefulBean stb = new statefulBean();
+        System.out.println(stb.getName() + " " + stb.getAddres() + " " + stb.getMail() + " " + stb.getPhone() + " false " + stb.getCarPrice() + " " + stb.getPickUpDate() + " " + stb.getPickUpDate() + " " +  stb.getDropOfDate() + " " + stb.getPickUpLocation() + " " + stb.getDropOfLocation());
         request.getRequestDispatcher("index.jsp").forward(request, response);
         processRequest(request, response);
     }

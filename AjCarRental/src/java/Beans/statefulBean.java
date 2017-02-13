@@ -28,6 +28,7 @@ public class statefulBean {
     public static String CarType;
     public static int carPrice;
     public static List officeList;
+    public static int isloggedin;
 
     public List getOfficeList() {
         return officeList;
@@ -131,5 +132,11 @@ public class statefulBean {
    }
    public void setCarHome(String carHome) {
        statefulBean.carHome = carHome;
+   }
+   public void setLoggedIn(int isloggedin) {
+       statefulBean.isloggedin = isloggedin;
+   }
+   public int getLoggedIn() {
+       return isloggedin;
    }
 }

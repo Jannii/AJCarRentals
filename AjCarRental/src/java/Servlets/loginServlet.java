@@ -97,20 +97,17 @@ public class loginServlet extends HttpServlet {
             User u = new User();
             u = (User) session.get(User.class, id);
             session.getTransaction().commit();
-            
-            statefulBean stb = new statefulBean();
-            stb.setName(u.getName());
-            stb.setAddres(u.getAdress());
-            stb.setMail(u.getEmail());
-            stb.setPhone(u.getPhone());
-            
-            
 
             for (EntityBeans.Login login : loginlist) {
                 System.out.println("in for loop");
 
                 if (login.getUsername().equals(user) && login.getUserpass().equals(pass)) {
                     System.out.println("Success");
+                    statefulBean stb = new statefulBean();
+                    stb.setName(u.getName());
+                    stb.setAddres(u.getAdress());
+                    stb.setMail(u.getEmail());
+                    stb.setPhone(u.getPhone());
                     try {
 
                         if (login.getStatus().equals("member")) {
