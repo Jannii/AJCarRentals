@@ -5,6 +5,9 @@
  */
 package Beans;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  *
  * @author bumblebee
@@ -24,9 +27,15 @@ public class statefulBean {
     public static String CarName;
     public static String CarType;
     public static int carPrice;
+    public static List officeList;
 
-    
-    
+    public List getOfficeList() {
+        return officeList;
+    }
+
+    public void setOfficeList(List officeList) {
+        statefulBean.officeList = officeList;
+    }
 
     public String getPickUpDate() {
         return pickUpDate;

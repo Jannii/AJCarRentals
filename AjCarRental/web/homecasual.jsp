@@ -24,7 +24,7 @@
         </style>
         <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
         <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-        <script type="text/javascript">
+        <script>
             $(function () {
                 $("#pickupdatepicker").datepicker();
             });
@@ -39,16 +39,14 @@
             function myMap() {
 
                 var locations = [
-                    ['Bondi Beach', -33.890542, 151.274856, 4],
-                    ['Coogee Beach', -33.923036, 151.259052, 5],
-                    ['Cronulla Beach', -34.028249, 151.157507, 3],
-                    ['Manly Beach', -33.80010128657071, 151.28747820854187, 2],
-                    ['Maroubra Beach', -33.950198, 151.259302, 1]
+                    ['Malmö Office', 55.5985038, 12.970319199999949, 1],
+                    ['Kristianstad Office', 56.0282729, 14.156845833333334, 1],
+                    
                 ];
 
                 var map = new google.maps.Map(document.getElementById('map'), {
-                    zoom: 1,
-                    center: new google.maps.LatLng(0.0, 0.0),
+                    zoom: 5,
+                    center: new google.maps.LatLng(59.3293235, 18.068580800000063),
                     mapTypeId: google.maps.MapTypeId.ROADMAP
                 });
 
@@ -58,7 +56,7 @@
 
                 for (i = 0; i < locations.length; i++) {
                     marker = new google.maps.Marker({
-                        position: new google.maps.LatLng(locations[i][3], locations[i][4]),
+                        position: new google.maps.LatLng(locations[i][1], locations[i][2]),
                         map: map
                     });
 
@@ -70,23 +68,9 @@
                     })(marker, i));
                 }
             }
-            function addLoc(){
-                List<Office> offices = (List<Office>) request.getAttribute("Loc");
-                for(int i =0; i>offices.length;i++){
-                    alert(offices[i])
-                }
-                Iterator Officeitr = offices.iterator();
-                while(Officeitr.hasNext()){
-                    Object[] Oobj = (Object[]) Officeitr.next();
-                    String id = String.valueOf(Oobj[0]);
-                    String name = String.valueOf(Oobj[1]);
-                
-                daySelect = document.getElementById('daySelect');
-                daySelect.options[daySelect.options.length] = new Option(name, id);
-                
-                }
+           
                
-            }
+            
 
         </script>
 
@@ -116,11 +100,7 @@
 
                                             <p>
                                                 Pickup Date: <input type="text" name ="pickupdate" id="pickupdatepicker" />
-                                            </p>
-                                        </td>
-                                        <td width = "49%" height = "50">
-                                            <p>
-                                                Dropof Date: <input type="text"  name="dropoffdate" id="dropoffdatepicker" />
+                                                Drop of Date: <input type="text"  name="dropoffdate" id="dropoffdatepicker" />
                                             </p>
                                         </td>
                                     </tr>
@@ -128,15 +108,20 @@
                                         <td width = "49%" height = "50">
                                             <p>
                                                 
-                                                Pickup Date: <select id="pickuploc" onfocus="addLoc()">
-                                                    <option>hej</option>
-                                                
+                                                Pickup Location: <select id="pickuploc" >
+                                                    <option value="2">Malmö Office</option>
+                                                    <option value="1">Kristianstad Office</option>
                                                 </select>
-                                                <button onselect="addLoc()">hej</button>
+                                            </p>
+                                            <p>
+                                                
+                                                 drop off Location: <select id="pickuploc" >
+                                                    <option value="2">Malmö Office</option>
+                                                    <option value="1">Kristianstad Office</option>
+                                                </select>
                                             </p>
                                         </td>
-                                        <td width = "49%" height = "50">
-                                        </td>
+                                        <
                                     </tr>
                                     <tr>
                                         <td>
@@ -144,13 +129,9 @@
                                             <div id="map" style="width:100%;height:500px"></div>
                                             <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD0GAEHADATv490rWxEHruelPDPFaWTqHc&callback=myMap"></script>
                                         </td>
-                                        <td>
-
-                                        </td>
                                     </tr>
                                     <tr>
                                         <td><input type="submit" name =checkcars" values="Check for cars"/></td>
-                                        <td></td>
                                     </tr>
                                 </form>
 
