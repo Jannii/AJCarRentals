@@ -116,6 +116,11 @@ public class chooseCarServlet extends HttpServlet {
                 request.setAttribute("dropOdDate", dropOfDate);
                 
                 request.setAttribute("carPrice", price);
+                
+                sfb.setCarName(c.getCarName());
+                sfb.setCarType(c.getCarType());
+                sfb.setCarHome(c.getCarHome());
+                
                 request.getRequestDispatcher("confirmPurchase.jsp").forward(request, response);
                 break;
             }

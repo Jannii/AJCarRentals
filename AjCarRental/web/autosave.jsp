@@ -13,7 +13,8 @@
     </head>
     <body>
         <h1></h1>
-        <form action="rentcarServlet" method="POST">
+        <form action="rentcarServlet" method="GET">
+            <jsp:include page="/autosave.jsp" />
             
         </form>
     </body>

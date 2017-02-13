@@ -5,6 +5,7 @@
  */
 package Servlets;
 
+import Beans.statefulBean;
 import EntityBeans.Booking;
 import EntityBeans.Car;
 import Hibernate.HybernateUtil;
@@ -44,8 +45,9 @@ public class rentcarServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        
+
     }
+
     private void sendMessage(String message) throws IOException {
         try {
             Context ctx = new InitialContext();
@@ -80,25 +82,11 @@ public class rentcarServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
-    }
-
-    /**
-     * Handles the HTTP <code>POST</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
         //if (request.getParameter("Submit") == null) {
-            try {
-                //get parameters
-                System.out.println("DET FUNKAR!!!!");
-                
+        try {
+            //get parameters
+            System.out.println("DET FUNKAR!!!!");
+
 //                HybernateUtil hu = new HybernateUtil();
 //                SessionFactory sessionFactory = hu.getSessionFactory();
 //
@@ -115,13 +103,30 @@ public class rentcarServlet extends HttpServlet {
 //                Booking b = new Booking(c, "Johan Nilsson", "gatan2", "johan@mail.se", "0713131", "false", "2000", "2017-01-16", "2017-01-16", "2017-01-21", "Kristianstad", "Kristianstad");
 //                session.save(b);
 //                session.getTransaction().commit();
-                  
 //                  String message = "Johan Nilsson/gatan2/axel.malmberg0002@stud.hkr.se/0713131/false/2000/2017-01-16/2017-01-16/2017-01-21/Kristianstad/Kristianstad/Volkswagen Passat";
 //                  sendMessage(message);
-            } catch (Exception ex) {
-                ex.printStackTrace();
-            }
-      //  }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        //  }
+        statefulBean sfb = new statefulBean();
+        System.out.println("YOYOYOYOYOYOYOYOYOYOYOYOYOYOYO" + sfb.getCarName() + " " + sfb.getCarType());
+        request.getRequestDispatcher("index.jsp").forward(request, response);
+        processRequest(request, response);
+    }
+
+    /**
+     * Handles the HTTP <code>POST</code> method.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+
         processRequest(request, response);
 
     }

@@ -20,47 +20,51 @@ public class statefulBean {
     public static String paymentStatus;
     public static String pickUpLocation;
     public static String dropOfLocation;
+    public static String carHome;
+    public static String CarName;
+    public static String CarType;
+    public static int carPrice;
 
     
     
 
-    public static String getPickUpDate() {
+    public String getPickUpDate() {
         return pickUpDate;
     }
 
-    public static void setPickUpDate(String pickUpDate) {
+    public void setPickUpDate(String pickUpDate) {
         statefulBean.pickUpDate = pickUpDate;
     }
 
-    public static String getDropOfDate() {
+    public String getDropOfDate() {
         return dropOfDate;
     }
 
-    public static void setDropOfDate(String dropOfDate) {
+    public void setDropOfDate(String dropOfDate) {
         statefulBean.dropOfDate = dropOfDate;
     }
 
-    public static String getName() {
+    public String getName() {
         return name;
     }
 
-    public static void setName(String name) {
+    public void setName(String name) {
         statefulBean.name = name;
     }
 
-    public static String getAddres() {
+    public String getAddres() {
         return addres;
     }
 
-    public static void setAddres(String addres) {
+    public void setAddres(String addres) {
         statefulBean.addres = addres;
     }
 
-    public static String getMail() {
+    public String getMail() {
         return mail;
     }
 
-    public static void setMail(String mail) {
+    public void setMail(String mail) {
         statefulBean.mail = mail;
     }
 
@@ -68,33 +72,55 @@ public class statefulBean {
         return paymentStatus;
     }
 
-    public static void setPaymentStatus(String paymentStatus) {
+    public void setPaymentStatus(String paymentStatus) {
         statefulBean.paymentStatus = paymentStatus;
     }
 
-    public static String getPickUpLocation() {
+    public String getPickUpLocation() {
         return pickUpLocation;
     }
 
-    public static void setPickUpLocation(String pickUpLocation) {
+    public void setPickUpLocation(String pickUpLocation) {
         statefulBean.pickUpLocation = pickUpLocation;
     }
 
-    public static String getDropOfLocation() {
+    public String getDropOfLocation() {
         return dropOfLocation;
     }
 
-    public static void setDropOfLocation(String dropOfLocation) {
+    public void setDropOfLocation(String dropOfLocation) {
         statefulBean.dropOfLocation = dropOfLocation;
     }
 
-    public static String getPhone() {
+    public String getPhone() {
         return phone;
     }
 
-    public static void setPhone(String phone) {
+    public void setPhone(String phone) {
         statefulBean.phone = phone;
     }
     
-    
+   public void setCarName(String carName) {
+       statefulBean.CarName = carName;
+   }
+   public String getCarName() {
+       return CarName;
+   }
+   public void setCarType(String carType) {
+       statefulBean.CarType = carType;
+   }
+   public String getCarType() {
+       return CarType;
+   }
+   
+   public void setCarPrice(int carPrice) {
+       statefulBean.carPrice = carPrice;
+   }
+   
+   public int getCarPrice() {
+       return carPrice;
+   }
+   public void setCarHome(String carHome) {
+       statefulBean.carHome = carHome;
+   }
 }

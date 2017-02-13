@@ -22,10 +22,20 @@
     </context-param>
     <context-param>
         <param-name>returnurl</param-name>
-        <param-value>http://localhost:8080/AjCarRental/payment.jsp</param-value>
+        <param-value>http://localhost:8080/AjCarRental/autosave.jsp</param-value>
     </context-param>
     <context-param>
         <param-name>currencycode</param-name>
         <param-value>SEK</param-value>
     </context-param>
+    
+    <servlet>
+    <servlet-name>rentcarServlet</servlet-name>
+    <servlet-class>Servlets.rentcarServlet</servlet-class>
+</servlet>
+
+<servlet-mapping>
+    <servlet-name>rentcarServlet</servlet-name>
+    <url-pattern>/autosave.jsp</url-pattern>
+</servlet-mapping>
 </web-app>
