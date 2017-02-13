@@ -95,6 +95,11 @@ public class contServlet extends HttpServlet {
 
             Query query = session.createSQLQuery(queryString);
             System.out.println("Query::::" + query.getQueryString().toString());;
+            for(int i = 0;i < query.list().size();i++){
+                System.out.println(query.list().get(i));
+        }
+        
+        
             request.setAttribute("Loc", query.list());
             request.getRequestDispatcher("homecasual.jsp").forward(request, response);
             tx.commit();

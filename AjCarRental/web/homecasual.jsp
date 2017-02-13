@@ -24,7 +24,7 @@
         </style>
         <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
         <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-        <script>
+        <script type="text/javascript">
             $(function () {
                 $("#pickupdatepicker").datepicker();
             });
@@ -70,7 +70,23 @@
                     })(marker, i));
                 }
             }
-
+            function addLoc(){
+                List<Office> offices = (List<Office>) request.getAttribute("Loc");
+                for(int i =0; i>offices.length;i++){
+                    alert(offices[i])
+                }
+                Iterator Officeitr = offices.iterator();
+                while(Officeitr.hasNext()){
+                    Object[] Oobj = (Object[]) Officeitr.next();
+                    String id = String.valueOf(Oobj[0]);
+                    String name = String.valueOf(Oobj[1]);
+                
+                daySelect = document.getElementById('daySelect');
+                daySelect.options[daySelect.options.length] = new Option(name, id);
+                
+                }
+               
+            }
 
         </script>
 
@@ -109,33 +125,21 @@
                                         </td>
                                     </tr>
                                     <tr>
+                                        <td width = "49%" height = "50">
+                                            <p>
+                                                
+                                                Pickup Date: <select id="pickuploc" onfocus="addLoc()">
+                                                    <option>hej</option>
+                                                
+                                                </select>
+                                                <button onselect="addLoc()">hej</button>
+                                            </p>
+                                        </td>
+                                        <td width = "49%" height = "50">
+                                        </td>
+                                    </tr>
+                                    <tr>
                                         <td>
-                                            <script>
-                                                <%
-                                                    List<Office> list = (List<Office>) request.getAttribute("Loc");
-                                                    Iterator itr = list.iterator();
-                                                    while (itr.hasNext()) {
-                                                        Object[] obj = (Object[]) itr.next();
-                                                        String id = String.valueOf(obj[0]);
-                                                        String name = String.valueOf(obj[1]);
-                                                        String address = String.valueOf(obj[2]);
-                                                        String locX = String.valueOf(obj[3]);
-                                                        String locY = String.valueOf(obj[4]);
-                                                        String phone = String.valueOf(obj[5]);
-                                                        System.out.println(locX);
-                                                %>
-                                                l.push(<%=id%>,<%=name%>,<%=address%>,<%=locX%>,<%=locY%>,<%=phone%>);
-                                                location.push(l);
-                                                for (int i = 0: i < location.size:i++)
-                                                {
-                                                    console.log("location" + location[0]);
-                                                }
-
-                                                <%}
-                                                %>
-                                                    
-                                            </script>
-
 
                                             <div id="map" style="width:100%;height:500px"></div>
                                             <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD0GAEHADATv490rWxEHruelPDPFaWTqHc&callback=myMap"></script>
@@ -156,14 +160,6 @@
                     </tr>
                 </tbody>
             </table>
-
-
-        </div>
-        <div class="sidebar">
-
-        </div>
-        <div class = "main">
-
         </div>
     </body>
 </html>
