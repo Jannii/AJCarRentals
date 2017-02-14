@@ -16,7 +16,7 @@
         <title>AJ Car Rentals</title>
         <style type="text/css">
             p {
-                color: white;
+                color: black;
             }
             th {
                 vertical-align: bottom;
@@ -77,7 +77,7 @@
     </head>
     <body>
         <div class="header">
-            <table border="2">
+            <table border="1">
                 <thead>
                     <tr>
                         <th width="15%" >
@@ -93,7 +93,7 @@
                     <tr>
                         <td></td>
                         <td>
-                            <table border="4" width = "100%">
+                            <table border="0" width = "100%">
                                 <form action="showavilableCarsServlet" method="post">
                                     <tr>
                                         <td width = "49%" height="50">

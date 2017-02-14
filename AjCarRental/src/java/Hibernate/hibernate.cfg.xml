@@ -45,7 +45,7 @@ Contributor(s):
     <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/ajcarrental?zeroDateTimeBehavior=convertToNull</property>
     <property name="hibernate.connection.username">root</property>
     <property name="hibernate.connection.password">root</property>
-    <property name="hibernate.connection.pool_size">8</property>
+    <property name="hibernate.connection.pool_size">50</property>
     <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
     <property name="hibernate.current_session_context_class">thread</property>
     <mapping resource="EntityBeans/Login.hbm.xml"/>
