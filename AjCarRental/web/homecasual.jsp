@@ -34,13 +34,12 @@
             var location;
             var map;
             var l;
-            
+
             function myMap() {
 
                 var locations = [
                     ['Malmö Office', 55.5985038, 12.970319199999949, 1],
                     ['Kristianstad Office', 56.0282729, 14.156845833333334, 1],
-                    
                 ];
 
                 var map = new google.maps.Map(document.getElementById('map'), {
@@ -67,14 +66,18 @@
                     })(marker, i));
                 }
             }
-           
-               
-            
+
+
+
 
         </script>
-
+        <script type="text/javascript">
+            function loadcorner() {
+                document.getElementById("corner").innerHTML("<a href="login.jsp" >Log IN</a>");
+            }
+        </script>
     </head>
-    <body>
+    <body onload="loadcorner()">
         <div class="header">
             <table border="1">
                 <thead>
@@ -85,11 +88,7 @@
                         <th width = "70%">
                             <label align ="center">AJ Car Rentals</label>
                         </th>
-                <script type="text/javascript">
-                    function loadcorner(){
-                document.getElementById("corner").innerHTML("<a href="login.jsp" >Log IN</a>");
-            }
-                </script>
+
                         <th width = "15%" id="corner"></th>
                     </tr>
                 </thead>
@@ -98,7 +97,7 @@
                         <td></td>
                         <td>
                             <table border="0" width = "100%">
-                                
+
                                 <form action="showavilableCarsServlet" method="post">
                                     <tr>
                                         <td width = "49%" height="50">
@@ -111,20 +110,20 @@
                                     <tr>
                                         <td width = "49%" height = "50">
                                             <p>
-                                                
-                                                Pickup Location: <select id="pickuploc" >
+
+                                                Pickup Location: <select name="pickuploc" id="pickuploc" >
                                                     <option value="2">Malmö Office</option>
                                                     <option value="1">Kristianstad Office</option>
                                                 </select>
-                                            
-                                                
-                                                 Drop off Location: <select id="dropoffloc" >
+
+
+                                                Drop off Location: <select name="dropoffloc" id="dropoffloc" >
                                                     <option value="2">Malmö Office</option>
                                                     <option value="1">Kristianstad Office</option>
                                                 </select>
                                             </p>
                                         </td>
-                                        
+
                                     </tr>
                                     <tr>
                                         <td>
