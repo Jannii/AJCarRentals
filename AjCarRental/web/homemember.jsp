@@ -84,7 +84,13 @@
                             <label align ="center">AJ Car Rentals</label>
                         </th>
 
-                        <th width = "15%" ><p><%=request.getAttribute("Username")%></p></th>
+                        <th width = "15%" >
+                            <p>
+                                Welcome Member <%=request.getAttribute("Username")%></br>
+                                <a href="homecasual.jsp">Logout</a>
+                            </p>
+                        
+                        </th>
                     </tr>
                 </thead>
                 <tbody>
@@ -107,14 +113,14 @@
                                             <p>
 
                                                 Pickup Location: <select name="pickuploc" id="pickuploc" >
-                                                    <option value="2">Malmö Office</option>
-                                                    <option value="1">Kristianstad Office</option>
+                                                    <option value="Malmö">Malmö</option>
+                                                    <option value="Kristianstad">Kristianstad</option>
                                                 </select>
 
 
                                                 Drop off Location: <select name="dropoffloc" id="dropoffloc" >
-                                                    <option value="2">Malmö Office</option>
-                                                    <option value="1">Kristianstad Office</option>
+                                                    <option value="Malmö">Malmö Office</option>
+                                                    <option value="Kristianstad">Kristianstad Office</option>
                                                 </select>
                                             </p>
                                         </td>
