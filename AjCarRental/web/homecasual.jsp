@@ -23,7 +23,7 @@
             }
         </style>
         <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-        <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+        <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js" type="text/javascript"></script>
         <script>
             $(function () {
                 $("#pickupdatepicker").datepicker();
@@ -34,7 +34,6 @@
             var location;
             var map;
             var l;
-            
             
             function myMap() {
 
@@ -86,7 +85,12 @@
                         <th width = "70%">
                             <label align ="center">AJ Car Rentals</label>
                         </th>
-                        <th width = "15%"><a href="login.jsp" >Log IN</a></th>
+                <script type="text/javascript">
+                    function loadcorner(){
+                document.getElementById("corner").innerHTML("<a href="login.jsp" >Log IN</a>");
+            }
+                </script>
+                        <th width = "15%" onload="loadcorner()" id="corner"></th>
                     </tr>
                 </thead>
                 <tbody>
