@@ -89,7 +89,7 @@
                         <th width = "15%"><a href="login.jsp" >Log IN</a></th>
                     </tr>
                 </thead>
-                <tbody background="Images/road.jpg">
+                <tbody>
                     <tr>
                         <td></td>
                         <td>

@@ -90,7 +90,7 @@ public class loginServlet extends HttpServlet {
             List<EntityBeans.Login> loginlist = query.list();
             session.getTransaction().commit();
 
-            int id = loginlist.get(0).getIdLogin();
+            int id = 1; //loginlist.get(0).getIdLogin();
 
             session = sessionFactory.openSession();
             session.beginTransaction();
@@ -98,10 +98,10 @@ public class loginServlet extends HttpServlet {
             u = (User) session.get(User.class, id);
             session.getTransaction().commit();
 
-            for (EntityBeans.Login login : loginlist) {
+            for (int i = 0;i > loginlist.size(); i++) {
                 System.out.println("in for loop");
 
-                if (login.getUsername().equals(user) && login.getUserpass().equals(pass)) {
+                if (loginlist.get(i).getUsername().equals(user) && loginlist.get(i).getUserpass().equals(pass)) {
                     System.out.println("Success");
                     statefulBean stb = new statefulBean();
                     stb.setName(u.getName());
@@ -110,7 +110,7 @@ public class loginServlet extends HttpServlet {
                     stb.setPhone(u.getPhone());
                     try {
 
-                        if (login.getStatus().equals("member")) {
+                        if (loginlist.get(i).getStatus().equals("member")) {
                             session = sessionFactory.getCurrentSession();
                             session.beginTransaction();
                             queryString = "SELECT * FROM Office";
@@ -119,7 +119,7 @@ public class loginServlet extends HttpServlet {
                             request.setAttribute("Loc", query.list());
                             System.out.println("member");
                             request.getRequestDispatcher("homemember.jsp").forward(request, response);
-                        } else if (login.getStatus().equals("admin")) {
+                        } else if (loginlist.get(i).getStatus().equals("admin")) {
                             session = sessionFactory.getCurrentSession();
                             session.beginTransaction();
                             queryString = "SELECT * FROM Office";
