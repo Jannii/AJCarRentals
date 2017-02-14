@@ -90,7 +90,7 @@
                 document.getElementById("corner").innerHTML("<a href="login.jsp" >Log IN</a>");
             }
                 </script>
-                        <th width = "15%" oninit="loadcorner()" id="corner"></th>
+                        <th width = "15%" id="corner"></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -118,7 +118,7 @@
                                                 </select>
                                             
                                                 
-                                                 Drop off Location: <select id="pickuploc" >
+                                                 Drop off Location: <select id="dropoffloc" >
                                                     <option value="2">Malmö Office</option>
                                                     <option value="1">Kristianstad Office</option>
                                                 </select>
