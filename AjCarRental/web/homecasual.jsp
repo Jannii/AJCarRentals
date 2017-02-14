@@ -107,14 +107,14 @@
                                             <p>
 
                                                 Pickup Location: <select name="pickuploc" id="pickuploc" >
-                                                    <option value="Malmö Office">Malmö Office</option>
-                                                    <option value="Kristianstad Office">Kristianstad Office</option>
+                                                    <option value="Malmö">Malmö Office</option>
+                                                    <option value="Kristianstad">Kristianstad Office</option>
                                                 </select>
 
 
                                                 Drop off Location: <select name="dropoffloc" id="dropoffloc" >
-                                                    <option value="Malmö Office">Malmö Office</option>
-                                                    <option value="Kristianstad Office">Kristianstad Office</option>
+                                                    <option value="Malmö">Malmö Office</option>
+                                                    <option value="Kristianstad">Kristianstad Office</option>
                                                 </select>
                                             </p>
                                         </td>

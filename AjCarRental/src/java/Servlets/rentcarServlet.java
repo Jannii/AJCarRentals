@@ -11,6 +11,11 @@ import EntityBeans.Car;
 import Hibernate.HybernateUtil;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.jms.ConnectionFactory;
 import javax.jms.MessageProducer;
 import javax.jms.Queue;
@@ -84,33 +89,44 @@ public class rentcarServlet extends HttpServlet {
             throws ServletException, IOException {
         //if (request.getParameter("Submit") == null) {
         try {
+            statefulBean stb = new statefulBean();
+            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+            Date today = dateFormat.parse(dateFormat.format(new Date()));
+            String todayDate = dateFormat.format(today);
             //get parameters
             System.out.println("DET FUNKAR!!!!");
 
-//                HybernateUtil hu = new HybernateUtil();
-//                SessionFactory sessionFactory = hu.getSessionFactory();
-//
-//               Session session = sessionFactory.openSession();
-//               session.beginTransaction();
-//               Car c = new Car();        
-//               c = (Car) session.get(Car.class, 1);
-//               session.getTransaction().commit();
-//
-//                session = sessionFactory.openSession();
-//                //Transaction tx = session.beginTransaction();
-//                session.beginTransaction();
-//
-//                Booking b = new Booking(c, "Johan Nilsson", "gatan2", "johan@mail.se", "0713131", "false", "2000", "2017-01-16", "2017-01-16", "2017-01-21", "Kristianstad", "Kristianstad");
-//                session.save(b);
-//                session.getTransaction().commit();
-//                  String message = "Johan Nilsson/gatan2/axel.malmberg0002@stud.hkr.se/0713131/false/2000/2017-01-16/2017-01-16/2017-01-21/Kristianstad/Kristianstad/Volkswagen Passat";
-//                  sendMessage(message);
+            HybernateUtil hu = new HybernateUtil();
+            SessionFactory sessionFactory = hu.getSessionFactory();
+
+            Session session = sessionFactory.openSession();
+            session.beginTransaction();
+            Car c = new Car();
+            c = (Car) session.get(Car.class, stb.getCarId());
+            session.getTransaction().commit();
+            
+            
+
+            session = sessionFactory.openSession();
+            //Transaction tx = session.beginTransaction();
+            session.beginTransaction();
+            
+            String totalPrice = "" + stb.getCarPrice();
+            
+            System.out.println(stb.getName() + "/" + stb.getAddres() + "/" + stb.getMail() + "/" + stb.getPhone() + "/true/ " + totalPrice + "/" + todayDate + "/" + stb.getCorrPickUpDate() + "/" + stb.getCorrDropOfDate() + "/" + stb.getPickUpLocation() + "/" + stb.getDropOfLocation() + "/" + stb.getCarName());
+            
+            Booking b = new Booking(c, stb.getName(), stb.getAddres(), stb.getMail(), stb.getPhone(), "true", totalPrice, todayDate, stb.getCorrPickUpDate(), stb.getCorrDropOfDate(), stb.getPickUpLocation(), stb.getDropOfLocation());
+//            Booking b = new Booking(c, "axel malmberg", "ribersborgsvagen 13b", "axel.malmberg0002@stud.hkr.se", "0733447411", "true", "2000", "02/14/2017", "02/18/2017", "02/20/2017", "Kristianstad", "Kristianstad");
+            session.save(b);
+            session.getTransaction().commit();
+            //String message = "Johan Nilsson/gatan2/axel.malmberg0002@stud.hkr.se/0713131/false/2000/2017-01-16/2017-01-16/2017-01-21/Kristianstad/Kristianstad/Volkswagen Passat";
+            String message = stb.getName() + "/" + stb.getAddres() + "/" + stb.getMail() + "/" + stb.getPhone() + "/true/ " + stb.getCarPrice() + "/" + todayDate + "/" + stb.getCorrPickUpDate() + "/" + stb.getCorrDropOfDate() + "/" + stb.getPickUpLocation() + "/" + stb.getDropOfLocation() + "/" + stb.getCarName();
+            sendMessage(message);
         } catch (Exception ex) {
             ex.printStackTrace();
         }
         //  }
-        statefulBean stb = new statefulBean();
-        System.out.println(stb.getName() + " " + stb.getAddres() + " " + stb.getMail() + " " + stb.getPhone() + " false " + stb.getCarPrice() + " " + stb.getPickUpDate() + " " + stb.getPickUpDate() + " " +  stb.getDropOfDate() + " " + stb.getPickUpLocation() + " " + stb.getDropOfLocation());
+//        System.out.println(stb.getName() + "/" + stb.getAddres() + "/" + stb.getMail() + "/" + stb.getPhone() + "/true/ " + stb.getCarPrice() + "/" + todayDate + "/" + stb.getPickUpDate() + "/" + stb.getDropOfDate() + "/" + stb.getPickUpLocation() + "/" + stb.getDropOfLocation() + "/" + stb.getCarName());
         request.getRequestDispatcher("index.jsp").forward(request, response);
         processRequest(request, response);
     }

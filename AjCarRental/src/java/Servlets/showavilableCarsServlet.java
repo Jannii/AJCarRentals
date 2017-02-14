@@ -86,15 +86,28 @@ public class showavilableCarsServlet extends HttpServlet {
         dropoffstring = request.getParameter("dropoffdate");
         System.out.println(dropoffstring);
         
+        String[] fpuDate = pickupstring.split("/");
+        String[] fdoDate = dropoffstring.split("/");
+        
+        String corrpuDate = fpuDate[2] + "-" + fpuDate[0] + "-" + fpuDate[1];
+        String corrdoDate = fdoDate[2] + "-" + fdoDate[0] + "-" + fdoDate[1];
+        System.out.println("correct pick up date: " + corrpuDate);
+        System.out.println("correct drop of date: " + corrdoDate);
+        
         statefulBean sfb = new statefulBean();
 
         sfb.setPickUpDate(pickupstring);
         sfb.setDropOfDate(dropoffstring);
+        
+        sfb.setCorrPickUpDate(corrpuDate);
+        sfb.setCorrDropOfDate(corrdoDate);
 
         String pickupLocation = request.getParameter("pickuploc");
         String dropoffLocation = request.getParameter("dropoffloc");
         System.out.println(pickupLocation);
         System.out.println(dropoffLocation);
+        sfb.setPickUpLocation(pickupLocation);
+        sfb.setDropOfLocation(dropoffLocation);
 
 
         hu = new HybernateUtil();

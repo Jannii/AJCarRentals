@@ -10,6 +10,11 @@ import EntityBeans.Car;
 import Hibernate.HybernateUtil;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -75,11 +80,11 @@ public class chooseCarServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         for (int i = 0; i < 1000; i++) {
-        if (request.getParameter("" + i) != null) {
-            System.out.println("the car id you choose: " + i);
-            
-            HybernateUtil hu = new HybernateUtil();
-            SessionFactory sessionFactory = hu.getSessionFactory();
+            if (request.getParameter("" + i) != null) {
+                System.out.println("the car id you choose: " + i);
+
+                HybernateUtil hu = new HybernateUtil();
+                SessionFactory sessionFactory = hu.getSessionFactory();
 
                 Session session = sessionFactory.openSession();
                 session.beginTransaction();
@@ -97,41 +102,39 @@ public class chooseCarServlet extends HttpServlet {
                 DateTime second = formatter.parseDateTime(dropOfDate);
                 int dif = 0;
                 dif = Days.daysBetween(first, second).getDays();
-                
+
                 System.out.println(dif);
-                
+
                 price = price * dif;
                 System.out.println(price);
-                
+
                 statefulBean stb = new statefulBean();
                 stb.setCarPrice(price);
-                
+
 //                request.setAttribute("name", c.getCarName());
 //                request.setAttribute("addres", c.getCarName());
 //                request.setAttribute("phone", c.getCarName());
 //                request.setAttribute("email", c.getCarName());
-                
-                
                 request.setAttribute("carName", c.getCarName());
                 request.setAttribute("carType", c.getCarType());
                 request.setAttribute("carHome", c.getCarHome());
                 request.setAttribute("carLocation", c.getCarlocation());
                 request.setAttribute("pickUpDate", pickUpDate);
                 request.setAttribute("dropOdDate", dropOfDate);
-                
+
                 request.setAttribute("carPrice", price);
-                
+
                 sfb.setCarName(c.getCarName());
                 sfb.setCarType(c.getCarType());
                 sfb.setCarHome(c.getCarHome());
-                
+                sfb.setCarId(c.getIdCar());
+
                 request.getRequestDispatcher("confirmPurchase.jsp").forward(request, response);
                 break;
             }
 
         }
-        
-        
+
         processRequest(request, response);
     }
 
