@@ -16,7 +16,7 @@
         <title>AJ Car Rentals</title>
         <style type="text/css">
             p {
-                color: white;
+                color: black;
             }
             th {
                 vertical-align: bottom;
@@ -77,7 +77,7 @@
     </head>
     <body>
         <div class="header">
-            <table border="2">
+            <table border="1">
                 <thead>
                     <tr>
                         <th width="15%" >
@@ -89,15 +89,15 @@
                         <th width = "15%"><a href="login.jsp" >Log IN</a></th>
                     </tr>
                 </thead>
-                <tbody background="Images/road.jpg">
+                <tbody>
                     <tr>
                         <td></td>
                         <td>
-                            <table border="4" width = "100%">
+                            <table border="0" width = "100%">
+                                
                                 <form action="showavilableCarsServlet" method="post">
                                     <tr>
                                         <td width = "49%" height="50">
-
                                             <p>
                                                 Pickup Date: <input type="text" name ="pickupdate" id="pickupdatepicker" />
                                                 Drop of Date: <input type="text"  name="dropoffdate" id="dropoffdatepicker" />
@@ -112,16 +112,15 @@
                                                     <option value="2">Malmö Office</option>
                                                     <option value="1">Kristianstad Office</option>
                                                 </select>
-                                            </p>
-                                            <p>
+                                            
                                                 
-                                                 drop off Location: <select id="pickuploc" >
+                                                 Drop off Location: <select id="pickuploc" >
                                                     <option value="2">Malmö Office</option>
                                                     <option value="1">Kristianstad Office</option>
                                                 </select>
                                             </p>
                                         </td>
-                                        <
+                                        
                                     </tr>
                                     <tr>
                                         <td>
