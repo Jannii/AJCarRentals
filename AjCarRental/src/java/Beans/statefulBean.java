@@ -32,6 +32,8 @@ public class statefulBean {
     public static int carPrice;
     public static List officeList;
     public static int isloggedin;
+    public static String update;
+    public static int bookingId;
 
     public List getOfficeList() {
         return officeList;
@@ -170,5 +172,18 @@ public class statefulBean {
 
     public void setCorrDropOfDate(String corrdropOfDate) {
         statefulBean.corrdropOfDate = corrdropOfDate;
+    }
+    public String getUpdate() {
+        return update;
+    }
+
+    public void setUpdate(String update) {
+        statefulBean.update = update;
+    }
+    public int getBookingId() {
+        return bookingId;
+    }
+    public void setBookingId(int bookingid) {
+        statefulBean.bookingId = bookingid; 
     }
 }

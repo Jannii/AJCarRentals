@@ -87,7 +87,19 @@ public class ListBookingsServlet extends HttpServlet {
                 Car c = b.getCar();
                 
                 statefulBean stb = new statefulBean();
-                stb.setName(b.getClientName());
+                stb.setBookingId(i);
+                stb.setUpdate("true");
+                
+                request.setAttribute("carName", c.getCarName());
+                request.setAttribute("carType", c.getCarType());
+                request.setAttribute("carHome", c.getCarHome());
+                request.setAttribute("carLocation", c.getCarlocation());
+                request.setAttribute("pickUpDate", b.getStartDate());
+                request.setAttribute("dropOdDate", b.getReturnDate());
+                request.setAttribute("loggedIn", "" + stb.getLoggedIn());
+                request.setAttribute("carPrice", b.getPrice());
+                
+                request.getRequestDispatcher("confirmPurchase.jsp").forward(request, response);
                 
                 
                 
