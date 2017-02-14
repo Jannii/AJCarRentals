@@ -90,7 +90,7 @@
                 document.getElementById("corner").innerHTML("<a href="login.jsp" >Log IN</a>");
             }
                 </script>
-                        <th width = "15%" onload="loadcorner()" id="corner"></th>
+                        <th width = "15%" oninit="loadcorner()" id="corner"></th>
                     </tr>
                 </thead>
                 <tbody>
