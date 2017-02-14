@@ -41,32 +41,7 @@ public class ListBookingsServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        Transaction tx = null;
-        Session session = null;
-        String pickupstring = "";
-        String dropoffstring = "";
-        HybernateUtil hu = null;
-        ArrayList<Booking> Booking = null;
         
-
-       
-
-
-        hu = new HybernateUtil();
-        SessionFactory sessionFactory = hu.getSessionFactory();
-        session = sessionFactory.getCurrentSession();
-        tx = session.beginTransaction();
-        System.out.println("cretaied sessions");
-
-        String queryString = "SELECT * FROM Bookings";
-
-        Query query = session.createSQLQuery(queryString);
-        System.out.println("Query::::" + query.getQueryString().toString());
-        request.setAttribute("Bookinglist", query.list());
-        request.getRequestDispatcher("listBookings.jsp").forward(request, response);
-        tx.commit();
-        System.out.println("txcommit.............................................................................");
-        hu.close();
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -95,6 +70,31 @@ public class ListBookingsServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        
+        
+        for (int i = 0; i < 1000; i++) {
+            if (request.getParameter("" + i) != null) {
+                System.out.println("The booking you chose had id: " + i);
+                HybernateUtil hu = new HybernateUtil();
+                SessionFactory sessionFactory = hu.getSessionFactory();
+
+                Session session = sessionFactory.openSession();
+                session.beginTransaction();
+                Booking b = new Booking();
+                b = (Booking) session.get(Booking.class, i);
+                session.getTransaction().commit();
+                
+                Car c = b.getCar();
+                
+                statefulBean stb = new statefulBean();
+                stb.setName(b.getClientName());
+                
+                
+                
+            }
+        }
+        
+        
         processRequest(request, response);
     }
 

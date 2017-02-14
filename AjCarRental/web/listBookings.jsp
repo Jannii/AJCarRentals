@@ -15,6 +15,7 @@
         <title>JSP Page</title>
     </head>
     <body>
+        <form action="ListBookingsServlet" method="post">
         <table>
             <%
                 List<Booking> l = (List<Booking>) request.getAttribute("Bookinglist");
@@ -35,50 +36,73 @@
                     String carid = String.valueOf(obj[10]);
                     String ploc = String.valueOf(obj[11]);
                     String dloc = String.valueOf(obj[12]);
+                    String type = "";
+                    if (pstatus.equals("true")) {
+                        type = "display: none;";
+                    } else {
+                        type = "";
+                    }
 
             %>
             <tr>
                 <td>
                     <p>ID: <%=Bookingid%></p>
+                    <p>Client name: <%=clientname%></p>
+                    <p>Client address: <%=clientadress%></p>
+                    <p>Client email: <%=clientmail%></p>
+                    <p>Client phone: <%=clientPhone%></p>
+                    <p>Payment status: <%=pstatus%></p>
+                    <p>Total price: <%=price%></p>
+                    <p>Booking date: <%=bdate%></p>
+                    <p>Pickup date: <%=pdate%></p>
+                    <p>Dropoff date: <%=ddate%></p>
+                    <p>Car id: <%=carid%></p>
+                    <p>pickup location: <%=ploc%></p>
+                    <p>Dropoff location: <%=dloc%></p>
+                    <div id="divCheckbox" style="<%=type%>">
+                        <input type="submit" value="Pay this bill" name="<%=Bookingid%>">
+                    </div>
+
                 </td>
                 <td>
-                    
+
                 </td>
 
                 <td>
-                  
+
                 </td>
                 <td>
-                    
+
                 </td>
                 <td>
-                    
+
                 </td>
                 <td>
-                    
+
                 </td>
                 <td>
-                    
+
                 </td>
                 <td>
-                    
+
                 </td>
                 <td>
-                    
+
                 </td>
                 <td>
-                    
+
                 </td>
                 <td>
-                    
+
                 </td>
                 <td>
-                    
+
                 </td>
-                
+
 
             </tr>
             <%}%>
         </table>
+        </form>
     </body>
 </html>

@@ -73,73 +73,98 @@ public class showavilableCarsServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
-        Transaction tx = null;
-        Session session = null;
-        String pickupstring = "";
-        String dropoffstring = "";
-        HybernateUtil hu = null;
-        ArrayList<Car> Cars = null;
-        
 
-        pickupstring = request.getParameter("pickupdate");
-        System.out.println(pickupstring);
-        dropoffstring = request.getParameter("dropoffdate");
-        System.out.println(dropoffstring);
-        
-        String[] fpuDate = pickupstring.split("/");
-        String[] fdoDate = dropoffstring.split("/");
-        
-        String corrpuDate = fpuDate[2] + "-" + fpuDate[0] + "-" + fpuDate[1];
-        String corrdoDate = fdoDate[2] + "-" + fdoDate[0] + "-" + fdoDate[1];
-        System.out.println("correct pick up date: " + corrpuDate);
-        System.out.println("correct drop of date: " + corrdoDate);
-        
-        statefulBean sfb = new statefulBean();
+        if (request.getParameter("checkcars") != null) {
+            Transaction tx = null;
+            Session session = null;
+            String pickupstring = "";
+            String dropoffstring = "";
+            HybernateUtil hu = null;
+            ArrayList<Car> Cars = null;
 
-        sfb.setPickUpDate(pickupstring);
-        sfb.setDropOfDate(dropoffstring);      
-        sfb.setCorrPickUpDate(corrpuDate);
-        sfb.setCorrDropOfDate(corrdoDate);
-        
-        if (sfb.getLoggedIn() == 1) {
-            
-        } else {
-        String name = request.getParameter("name");
-        String address = request.getParameter("adress");
-        String email = request.getParameter("email");
-        String phone = request.getParameter("phone");
-        
-        sfb.setName(name);
-        sfb.setAddres(address);
-        sfb.setMail(email);
-        sfb.setPhone(phone);
+            pickupstring = request.getParameter("pickupdate");
+            System.out.println(pickupstring);
+            dropoffstring = request.getParameter("dropoffdate");
+            System.out.println(dropoffstring);
+
+            String[] fpuDate = pickupstring.split("/");
+            String[] fdoDate = dropoffstring.split("/");
+
+            String corrpuDate = fpuDate[2] + "-" + fpuDate[0] + "-" + fpuDate[1];
+            String corrdoDate = fdoDate[2] + "-" + fdoDate[0] + "-" + fdoDate[1];
+            System.out.println("correct pick up date: " + corrpuDate);
+            System.out.println("correct drop of date: " + corrdoDate);
+
+            statefulBean sfb = new statefulBean();
+
+            sfb.setPickUpDate(pickupstring);
+            sfb.setDropOfDate(dropoffstring);
+            sfb.setCorrPickUpDate(corrpuDate);
+            sfb.setCorrDropOfDate(corrdoDate);
+
+            if (sfb.getLoggedIn() == 1) {
+
+            } else {
+                String name = request.getParameter("name");
+                String address = request.getParameter("adress");
+                String email = request.getParameter("email");
+                String phone = request.getParameter("phone");
+
+                sfb.setName(name);
+                sfb.setAddres(address);
+                sfb.setMail(email);
+                sfb.setPhone(phone);
+            }
+
+            String pickupLocation = request.getParameter("pickuploc");
+            String dropoffLocation = request.getParameter("dropoffloc");
+            System.out.println(pickupLocation);
+            System.out.println(dropoffLocation);
+            sfb.setPickUpLocation(pickupLocation);
+            sfb.setDropOfLocation(dropoffLocation);
+
+            hu = new HybernateUtil();
+            SessionFactory sessionFactory = hu.getSessionFactory();
+            session = sessionFactory.getCurrentSession();
+            tx = session.beginTransaction();
+            System.out.println("cretaied sessions");
+
+            String queryString = "SELECT * FROM car WHERE idCar not in (SELECT Car_idCar FROM BOOKING WHERE startdate BETWEEN :startdate  AND :returndate)";
+
+            Query query = session.createSQLQuery(queryString);
+            System.out.println("Query::::" + query.getQueryString().toString());
+            query.setParameter("startdate", pickupstring);
+            query.setParameter("returndate", dropoffstring);
+            request.setAttribute("Carlist", query.list());
+            request.getRequestDispatcher("listcars.jsp").forward(request, response);
+            tx.commit();
+            System.out.println("txcommit.............................................................................");
+            hu.close();
         }
-        
-        String pickupLocation = request.getParameter("pickuploc");
-        String dropoffLocation = request.getParameter("dropoffloc");
-        System.out.println(pickupLocation);
-        System.out.println(dropoffLocation);
-        sfb.setPickUpLocation(pickupLocation);
-        sfb.setDropOfLocation(dropoffLocation);
+        if (request.getParameter("billhistory") != null) {
+            HybernateUtil hu = null;
+            Transaction tx = null;
+            Session session = null;
+            statefulBean sfb = new statefulBean();
+            
+            
+            hu = new HybernateUtil();
+            SessionFactory sessionFactory = hu.getSessionFactory();
+            session = sessionFactory.getCurrentSession();
+            tx = session.beginTransaction();
+            System.out.println("cretaied sessions");
 
+            String queryString = "SELECT * FROM booking where ClientName = :ClientName";
+            
+            Query query = session.createSQLQuery(queryString);
+            query.setParameter("ClientName", sfb.getName());
+            request.setAttribute("Bookinglist", query.list());
+            request.getRequestDispatcher("listBookings.jsp").forward(request, response);
+            tx.commit();
+            hu.close();
 
-        hu = new HybernateUtil();
-        SessionFactory sessionFactory = hu.getSessionFactory();
-        session = sessionFactory.getCurrentSession();
-        tx = session.beginTransaction();
-        System.out.println("cretaied sessions");
-
-        String queryString = "SELECT * FROM car WHERE idCar not in (SELECT Car_idCar FROM BOOKING WHERE startdate BETWEEN :startdate  AND :returndate)";
-
-        Query query = session.createSQLQuery(queryString);
-        System.out.println("Query::::" + query.getQueryString().toString());
-        query.setParameter("startdate", pickupstring);
-        query.setParameter("returndate", dropoffstring);
-        request.setAttribute("Carlist", query.list());
-        request.getRequestDispatcher("listcars.jsp").forward(request, response);
-        tx.commit();
-        System.out.println("txcommit.............................................................................");
-        hu.close();
+            
+        }
 
     }
 

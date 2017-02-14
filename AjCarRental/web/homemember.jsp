@@ -134,7 +134,8 @@
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td><input type="submit" name =checkcars" values="Check for cars"/></td>
+                                        <td><input type="submit" value="next" name ="checkcars" values="Check for cars"/>
+                                            <input type="submit" value="bills" name ="billhistory" values="billhistory"/></td>
                                     </tr>
                                 </form>
 

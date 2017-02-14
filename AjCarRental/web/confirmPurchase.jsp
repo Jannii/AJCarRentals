@@ -51,13 +51,6 @@
                 type = "";
             }
         %>
-        
-        <div id="divCheckbox" style="<%=type%>">
-            Your Name: <input type="Text"/><br>
-            Your Adress:<input type="Text"/><br>
-            Your Email:<input type="Text"/><br>
-            Your Phone<input type="Text"/><br> 
-        </div>
             
             <div id="divCheckbox2" style="<%=type2%>">
                 <h1>Pay later?</h1>
