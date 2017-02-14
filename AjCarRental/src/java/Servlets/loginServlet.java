@@ -80,6 +80,8 @@ public class loginServlet extends HttpServlet {
             HybernateUtil hu = new HybernateUtil();
             SessionFactory sessionFactory = hu.getSessionFactory();
  
+            //connects to the database
+            //and gets the login info for the username that we got from the textboxes
             Session session = sessionFactory.getCurrentSession();
             session.beginTransaction();
             System.out.println("Session beginTransaction");
@@ -110,6 +112,9 @@ public class loginServlet extends HttpServlet {
             session.getTransaction().commit();
             System.out.println("commit");
  
+            //checks to see what kind of member it is and if the username and password matches
+            //ex admin or member
+            //also some error handling
             for (int i = 0; i < loginlist.size(); i++) {
                 System.out.println("in for loop");
  

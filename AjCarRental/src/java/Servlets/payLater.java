@@ -59,6 +59,9 @@ public class payLater extends HttpServlet {
             //ConnectionFactory     connectionFactory = (ConnectionFactory)ctx.lookup("tConnectionFactory");
             //Queue     queue = (Queue)ctx.lookup("jms/tQueue");
 
+            //connects to the JMS via connectionFactory and queue
+            //sends the message about the booking to the MBD
+            //MDB uses javaMail to send the mail to the client
             System.out.println("1111111111111111111111111111");
             ConnectionFactory connectionFactory = (ConnectionFactory) ctx.lookup("ReqConnectionFactory");
             Queue queue = (Queue) ctx.lookup("jms/Queue");
@@ -105,6 +108,7 @@ public class payLater extends HttpServlet {
         System.out.println("Det gick som det skall");
         //if (request.getParameter("Submit") == null) {
         try {
+            //gets the current date for the booking info
             statefulBean stb = new statefulBean();
             SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
             Date today = dateFormat.parse(dateFormat.format(new Date()));
@@ -115,6 +119,7 @@ public class payLater extends HttpServlet {
             HybernateUtil hu = new HybernateUtil();
             SessionFactory sessionFactory = hu.getSessionFactory();
 
+            //connects to the database to get car info
             Session session = sessionFactory.openSession();
             session.beginTransaction();
             Car c = new Car();
@@ -129,11 +134,13 @@ public class payLater extends HttpServlet {
 
             System.out.println(stb.getName() + "/" + stb.getAddres() + "/" + stb.getMail() + "/" + stb.getPhone() + "/false/ " + totalPrice + "/" + todayDate + "/" + stb.getCorrPickUpDate() + "/" + stb.getCorrDropOfDate() + "/" + stb.getPickUpLocation() + "/" + stb.getDropOfLocation() + "/" + stb.getCarName());
 
+            //creates new booking and adds it to the database
             Booking b = new Booking(c, stb.getName(), stb.getAddres(), stb.getMail(), stb.getPhone(), "false", totalPrice, todayDate, stb.getCorrPickUpDate(), stb.getCorrDropOfDate(), stb.getPickUpLocation(), stb.getDropOfLocation());
 //            Booking b = new Booking(c, "axel malmberg", "ribersborgsvagen 13b", "axel.malmberg0002@stud.hkr.se", "0733447411", "true", "2000", "02/14/2017", "02/18/2017", "02/20/2017", "Kristianstad", "Kristianstad");
             session.save(b);
             session.getTransaction().commit();
             //String message = "Johan Nilsson/gatan2/axel.malmberg0002@stud.hkr.se/0713131/false/2000/2017-01-16/2017-01-16/2017-01-21/Kristianstad/Kristianstad/Volkswagen Passat";
+            //Creates a message string that is sent to the mdb where java mail is.
             String message = stb.getName() + "/" + stb.getAddres() + "/" + stb.getMail() + "/" + stb.getPhone() + "/false/ " + stb.getCarPrice() + "/" + todayDate + "/" + stb.getCorrPickUpDate() + "/" + stb.getCorrDropOfDate() + "/" + stb.getPickUpLocation() + "/" + stb.getDropOfLocation() + "/" + stb.getCarName();
             sendMessage(message);
         } catch (Exception ex) {

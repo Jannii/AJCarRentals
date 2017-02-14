@@ -59,6 +59,9 @@ public class rentcarServlet extends HttpServlet {
             //ConnectionFactory     connectionFactory = (ConnectionFactory)ctx.lookup("tConnectionFactory");
             //Queue     queue = (Queue)ctx.lookup("jms/tQueue");
 
+            //connects to the JMS via connectionFactory and queue
+            //sends the message about the booking to the MBD
+            //MDB uses javaMail to send the mail to the client
             System.out.println("1111111111111111111111111111");
             ConnectionFactory connectionFactory = (ConnectionFactory) ctx.lookup("ReqConnectionFactory");
             Queue queue = (Queue) ctx.lookup("jms/Queue");
@@ -91,8 +94,12 @@ public class rentcarServlet extends HttpServlet {
         try {
             statefulBean stb = new statefulBean();
 
+            //first we ckeck if it going to update an existing booking from payment status true to false
+            //or if it is going to create a new booking
+            //we come here after being redirected from paypal
             if (stb.getUpdate().equals("true")) {
 
+                //here we only update an existing booking from false payment to true
                 HybernateUtil hu = new HybernateUtil();
                 SessionFactory sessionFactory = hu.getSessionFactory();
 
@@ -107,6 +114,7 @@ public class rentcarServlet extends HttpServlet {
                 
 
             } else {
+                //here we come if its a completl new booking
                 SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
                 Date today = dateFormat.parse(dateFormat.format(new Date()));
                 String todayDate = dateFormat.format(today);
@@ -116,6 +124,7 @@ public class rentcarServlet extends HttpServlet {
                 HybernateUtil hu = new HybernateUtil();
                 SessionFactory sessionFactory = hu.getSessionFactory();
 
+                //gets information about the car we have booked
                 Session session = sessionFactory.openSession();
                 session.beginTransaction();
                 Car c = new Car();
@@ -129,12 +138,14 @@ public class rentcarServlet extends HttpServlet {
                 String totalPrice = "" + stb.getCarPrice();
 
                 System.out.println(stb.getName() + "/" + stb.getAddres() + "/" + stb.getMail() + "/" + stb.getPhone() + "/true/ " + totalPrice + "/" + todayDate + "/" + stb.getCorrPickUpDate() + "/" + stb.getCorrDropOfDate() + "/" + stb.getPickUpLocation() + "/" + stb.getDropOfLocation() + "/" + stb.getCarName());
-
+                
+                //here we add the booking to the database
                 Booking b = new Booking(c, stb.getName(), stb.getAddres(), stb.getMail(), stb.getPhone(), "true", totalPrice, todayDate, stb.getCorrPickUpDate(), stb.getCorrDropOfDate(), stb.getPickUpLocation(), stb.getDropOfLocation());
 //            Booking b = new Booking(c, "axel malmberg", "ribersborgsvagen 13b", "axel.malmberg0002@stud.hkr.se", "0733447411", "true", "2000", "02/14/2017", "02/18/2017", "02/20/2017", "Kristianstad", "Kristianstad");
                 session.save(b);
                 session.getTransaction().commit();
                 //String message = "Johan Nilsson/gatan2/axel.malmberg0002@stud.hkr.se/0713131/false/2000/2017-01-16/2017-01-16/2017-01-21/Kristianstad/Kristianstad/Volkswagen Passat";
+                //here we create the message that is going to be sent to the client to confirm the booking
                 String message = stb.getName() + "/" + stb.getAddres() + "/" + stb.getMail() + "/" + stb.getPhone() + "/true/ " + stb.getCarPrice() + "/" + todayDate + "/" + stb.getCorrPickUpDate() + "/" + stb.getCorrDropOfDate() + "/" + stb.getPickUpLocation() + "/" + stb.getDropOfLocation() + "/" + stb.getCarName();
                 sendMessage(message);
             }

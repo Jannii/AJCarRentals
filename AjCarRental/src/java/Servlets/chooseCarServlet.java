@@ -79,10 +79,15 @@ public class chooseCarServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        
+        //the loop checks what button you have clicked
+        //the name of the button is the same as the car id
+        // so that we can get the correct booking info from the database
         for (int i = 0; i < 1000; i++) {
             if (request.getParameter("" + i) != null) {
                 System.out.println("the car id you choose: " + i);
 
+                //connects to the database so that we can get the correct information about the car
                 HybernateUtil hu = new HybernateUtil();
                 SessionFactory sessionFactory = hu.getSessionFactory();
 
@@ -92,6 +97,10 @@ public class chooseCarServlet extends HttpServlet {
                 c = (Car) session.get(Car.class, i);
                 session.getTransaction().commit();
 
+                
+                //formatting the dates so that we can calculate how many days the client has chosen
+                //calculates the totalprice based on the daily price * the days it is going to be rented
+                //updates the datastorage
                 int price = c.getDailyPrice();
                 statefulBean sfb = new statefulBean();
                 String pickUpDate = sfb.getPickUpDate();
@@ -108,6 +117,8 @@ public class chooseCarServlet extends HttpServlet {
                 price = price * dif;
                 System.out.println(price);
 
+                //Updates the datastorage some more and sets the attributes for the next page
+                //so that the client knows what he/she is paying for
                 statefulBean stb = new statefulBean();
                 stb.setCarPrice(price);
 
@@ -125,6 +136,7 @@ public class chooseCarServlet extends HttpServlet {
 
                 request.setAttribute("carPrice", price);
 
+                //some more datastorage updates
                 sfb.setCarName(c.getCarName());
                 sfb.setCarType(c.getCarType());
                 sfb.setCarHome(c.getCarHome());

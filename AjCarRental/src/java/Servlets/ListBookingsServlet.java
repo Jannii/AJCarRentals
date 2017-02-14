@@ -71,13 +71,17 @@ public class ListBookingsServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
-        
+        //the loop checks what button you have clicked
+        //the name of the button is the same as the bookings id
+        // so that we can get the correct booking info from the database
         for (int i = 0; i < 1000; i++) {
             if (request.getParameter("" + i) != null) {
                 System.out.println("The booking you chose had id: " + i);
                 HybernateUtil hu = new HybernateUtil();
                 SessionFactory sessionFactory = hu.getSessionFactory();
-
+                
+                //connects to the database and gets the correct booking info
+                //and updates the datastorage
                 Session session = sessionFactory.openSession();
                 session.beginTransaction();
                 Booking b = new Booking();
@@ -90,6 +94,7 @@ public class ListBookingsServlet extends HttpServlet {
                 stb.setBookingId(i);
                 stb.setUpdate("true");
                 
+                //sends attributes to the next jsp so that the client can see what he is paying for
                 request.setAttribute("carName", c.getCarName());
                 request.setAttribute("carType", c.getCarType());
                 request.setAttribute("carHome", c.getCarHome());

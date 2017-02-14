@@ -71,6 +71,8 @@ public class addmemberServlet extends HttpServlet {
             throws ServletException, IOException {
         processRequest(request, response);
         if (request.getParameter("Submit") != null) {
+            
+            //gets the vales from the textboxes on the jsp page.
             String username = request.getParameter("username");
             String userpass = request.getParameter("password");
 
@@ -80,6 +82,8 @@ public class addmemberServlet extends HttpServlet {
             String phone = request.getParameter("phone");
             Login lid = null;
             try {
+                //connects to the database
+                //adds the new member to the database tables users and login
                 HybernateUtil hu = new HybernateUtil();
                 SessionFactory sessionFactory = hu.getSessionFactory();
                 Session session = sessionFactory.getCurrentSession();

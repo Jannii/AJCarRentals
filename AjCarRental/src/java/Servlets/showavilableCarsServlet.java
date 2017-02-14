@@ -74,7 +74,9 @@ public class showavilableCarsServlet extends HttpServlet {
             throws ServletException, IOException {
         processRequest(request, response);
 
+        //first we check what the user wants to do? either look thru booking history or rent a car
         if (request.getParameter("checkcars") != null) {
+            //here we come if you want to rent a car
             Transaction tx = null;
             Session session = null;
             String pickupstring = "";
@@ -82,6 +84,10 @@ public class showavilableCarsServlet extends HttpServlet {
             HybernateUtil hu = null;
             ArrayList<Car> Cars = null;
 
+            
+            //first we handle the information needed to find a car
+            //the dates and where it is going to be picked up/dropped off
+            //this gets saved to the datastorage
             pickupstring = request.getParameter("pickupdate");
             System.out.println(pickupstring);
             dropoffstring = request.getParameter("dropoffdate");
@@ -105,6 +111,10 @@ public class showavilableCarsServlet extends HttpServlet {
             if (sfb.getLoggedIn() == 1) {
 
             } else {
+                //if its not member the client must fill in some extra information that we dont know yet
+                //so that we can create a full booking
+                //this happens here
+                //saves more to datastorage
                 String name = request.getParameter("name");
                 String address = request.getParameter("adress");
                 String email = request.getParameter("email");
@@ -116,6 +126,8 @@ public class showavilableCarsServlet extends HttpServlet {
                 sfb.setPhone(phone);
             }
 
+            
+            
             String pickupLocation = request.getParameter("pickuploc");
             String dropoffLocation = request.getParameter("dropoffloc");
             System.out.println(pickupLocation);
@@ -123,6 +135,8 @@ public class showavilableCarsServlet extends HttpServlet {
             sfb.setPickUpLocation(pickupLocation);
             sfb.setDropOfLocation(dropoffLocation);
 
+            //here we get the avaliaable cars before sending them in a list to the next jsp we get redirected to
+            //we connect to the database to get the carlist
             hu = new HybernateUtil();
             SessionFactory sessionFactory = hu.getSessionFactory();
             session = sessionFactory.getCurrentSession();
@@ -147,7 +161,8 @@ public class showavilableCarsServlet extends HttpServlet {
             Session session = null;
             statefulBean sfb = new statefulBean();
             
-            
+            //here we do the same as the code above but we get a list of bookings instead so that
+            //we can append the bookings from the list we get from the database in the next jsp we get redirected to
             hu = new HybernateUtil();
             SessionFactory sessionFactory = hu.getSessionFactory();
             session = sessionFactory.getCurrentSession();
