@@ -94,10 +94,10 @@
                         <td></td>
                         <td>
                             <table border="0" width = "100%">
+                                
                                 <form action="showavilableCarsServlet" method="post">
                                     <tr>
                                         <td width = "49%" height="50">
-
                                             <p>
                                                 Pickup Date: <input type="text" name ="pickupdate" id="pickupdatepicker" />
                                                 Drop of Date: <input type="text"  name="dropoffdate" id="dropoffdatepicker" />
@@ -112,16 +112,15 @@
                                                     <option value="2">Malmö Office</option>
                                                     <option value="1">Kristianstad Office</option>
                                                 </select>
-                                            </p>
-                                            <p>
+                                            
                                                 
-                                                 drop off Location: <select id="pickuploc" >
+                                                 Drop off Location: <select id="pickuploc" >
                                                     <option value="2">Malmö Office</option>
                                                     <option value="1">Kristianstad Office</option>
                                                 </select>
                                             </p>
                                         </td>
-                                        <
+                                        
                                     </tr>
                                     <tr>
                                         <td>
