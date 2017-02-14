@@ -130,8 +130,9 @@ public class loginServlet extends HttpServlet {
                             query = session.createSQLQuery(queryString);
                             System.out.println("Query::::" + query.getQueryString().toString());;
                             request.setAttribute("Loc", query.list());
+                            request.setAttribute("Username", gotname);
                             System.out.println("member");
-                            request.getRequestDispatcher("homecasual.jsp").forward(request, response);
+                            request.getRequestDispatcher("homemember.jsp").forward(request, response);
                         } else if (gotstatus.equals("admin")) {
                             session = sessionFactory.getCurrentSession();
                             session.beginTransaction();
@@ -139,8 +140,9 @@ public class loginServlet extends HttpServlet {
                             query = session.createSQLQuery(queryString);
                             System.out.println("Query::::" + query.getQueryString().toString());;
                             request.setAttribute("Loc", query.list());
-                            System.out.println("member");
-                            request.getRequestDispatcher("homecasual.jsp").forward(request, response);
+                            request.setAttribute("Username", gotname);
+                            System.out.println("admin");
+                            request.getRequestDispatcher("homeadmin.jsp").forward(request, response);
                         }
  
                     } catch (Exception ex) {

@@ -71,13 +71,8 @@
 
 
         </script>
-        <script type="text/javascript">
-            function loadcorner() {
-                document.getElementById("corner").innerHTML("<a href="login.jsp" >Log IN</a>");
-            }
-        </script>
     </head>
-    <body onload="loadcorner()">
+    <body >
         <div class="header">
             <table border="1">
                 <thead>
@@ -89,7 +84,7 @@
                             <label align ="center">AJ Car Rentals</label>
                         </th>
 
-                        <th width = "15%" id="corner"></th>
+                        <th width = "15%" ><p><a href="login.jsp" >Log IN</a></p></th>
                     </tr>
                 </thead>
                 <tbody>
