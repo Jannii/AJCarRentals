@@ -89,7 +89,7 @@ public class loginServlet extends HttpServlet {
             query.setParameter("user", user);
             List<EntityBeans.Login> loginlist = query.list();
             session.getTransaction().commit();
-
+            
             int id = loginlist.get(0).getIdLogin();
 
             session = sessionFactory.openSession();
