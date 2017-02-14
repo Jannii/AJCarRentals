@@ -29,7 +29,7 @@
             <table border="1">
                 <thead>
                     <tr>
-                        <th></th>
+                        <th>You can chose this cars</th>
                         <th></th>
                     </tr>
                 </thead>
@@ -59,7 +59,6 @@
                         </td>
 
                         <td>
-                            <!--<input type="submit" value="Rent this car" name="<%=service%>">-->
                             <input type="submit" value="Rent this car" name="<%=service%>">
                         </td>
 

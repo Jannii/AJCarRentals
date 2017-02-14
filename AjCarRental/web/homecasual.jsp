@@ -139,7 +139,7 @@
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td><input type="submit" name =checkcars" values="Check for cars"/></td>
+                                        <td><input type="submit" name ="checkcars" value="Check for cars"/></td>
                                     </tr>
                                 </form>
 
