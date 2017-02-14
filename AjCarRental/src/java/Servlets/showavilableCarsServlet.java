@@ -97,11 +97,24 @@ public class showavilableCarsServlet extends HttpServlet {
         statefulBean sfb = new statefulBean();
 
         sfb.setPickUpDate(pickupstring);
-        sfb.setDropOfDate(dropoffstring);
-        
+        sfb.setDropOfDate(dropoffstring);      
         sfb.setCorrPickUpDate(corrpuDate);
         sfb.setCorrDropOfDate(corrdoDate);
-
+        
+        if (sfb.getLoggedIn() == 1) {
+            
+        } else {
+        String name = request.getParameter("name");
+        String address = request.getParameter("adress");
+        String email = request.getParameter("email");
+        String phone = request.getParameter("phone");
+        
+        sfb.setName(name);
+        sfb.setAddres(address);
+        sfb.setMail(email);
+        sfb.setPhone(phone);
+        }
+        
         String pickupLocation = request.getParameter("pickuploc");
         String dropoffLocation = request.getParameter("dropoffloc");
         System.out.println(pickupLocation);

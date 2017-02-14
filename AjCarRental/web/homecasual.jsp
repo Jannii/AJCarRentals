@@ -121,6 +121,17 @@
 
                                     </tr>
                                     <tr>
+                                        <td width = "49%" height = "50">
+                                            <p>
+                                                Your Name: <input type="Text" name="name"/><br>
+                                                Your Adress:<input type="Text" name="adress"/><br>
+                                                Your Email:<input type="Text" name="email"/><br>
+                                                Your Phone<input type="Text" name="phone"/><br> 
+                                            </p>
+                                        </td>
+
+                                    </tr>
+                                    <tr>
                                         <td>
 
                                             <div id="map" style="width:100%;height:500px"></div>

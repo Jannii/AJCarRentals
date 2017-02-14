@@ -121,6 +121,7 @@ public class chooseCarServlet extends HttpServlet {
                 request.setAttribute("carLocation", c.getCarlocation());
                 request.setAttribute("pickUpDate", pickUpDate);
                 request.setAttribute("dropOdDate", dropOfDate);
+                request.setAttribute("loggedIn", "" + stb.getLoggedIn());
 
                 request.setAttribute("carPrice", price);
 

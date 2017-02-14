@@ -40,18 +40,40 @@
         <br>
         <%
             out.println("Total pricee: " + request.getAttribute("carPrice"));
+            String isLoggedIn = request.getAttribute("loggedIn").toString();
+            String type = "";
+            String type2 = "display: none;";
+            int loggedIn = Integer.parseInt(isLoggedIn);
+            if (loggedIn == 1) {
+                type = "display: none;";
+                type2 = "";
+            } else {
+                type = "";
+            }
         %>
+        
+        <div id="divCheckbox" style="<%=type%>">
+            Your Name: <input type="Text"/><br>
+            Your Adress:<input type="Text"/><br>
+            Your Email:<input type="Text"/><br>
+            Your Phone<input type="Text"/><br> 
+        </div>
+            
+            <div id="divCheckbox2" style="<%=type2%>">
+                <h1>Pay later?</h1>
+                <form action="payLater" method="post">
+                    <input type="submit" name="payLater" value="payLater"/>
+                </form>
+            </div>
+            
         <br>
         <form action="${initParam['posturl']}" method="POST">
             <%
             String price = request.getAttribute("carPrice").toString();
-            String carName = request.getAttribute("carName").toString();
+            String carName = request.getAttribute("carName").toString(); 
             %>
-            Your Name: <input type="Text"/><br>
-            Your Adress:<input type="Text"/><br>
-            Your Email:<input type="Text"/><br>
-            Your Phone<input type="Text"/><br>
-        <h1>PAY UP BITCH</h1>
+            
+        <h1>Pay now?</h1>
         <input type="hidden" name="upload" value="1"/>
         <input type="hidden" name="return" value="${initParam['returnurl']}"/>
         <input type="hidden" name="cmd" value="_cart"/>
