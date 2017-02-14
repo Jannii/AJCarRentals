@@ -120,6 +120,7 @@ public class loginServlet extends HttpServlet {
                     stb.setAddres(u.getAdress());
                     stb.setMail(u.getEmail());
                     stb.setPhone(u.getPhone());
+                    stb.setLoggedIn(1);
                     try {
  
                         if (gotstatus.equals("member")) {

@@ -91,7 +91,7 @@ public class showavilableCarsServlet extends HttpServlet {
         sfb.setPickUpDate(pickupstring);
         sfb.setDropOfDate(dropoffstring);
 
-        
+        String pickupLocation = request.getParameter("");
 
 
         hu = new HybernateUtil();

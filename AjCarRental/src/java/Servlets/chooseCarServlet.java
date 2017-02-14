@@ -102,6 +102,10 @@ public class chooseCarServlet extends HttpServlet {
                 
                 price = price * dif;
                 System.out.println(price);
+                
+                statefulBean stb = new statefulBean();
+                stb.setCarPrice(price);
+                
 //                request.setAttribute("name", c.getCarName());
 //                request.setAttribute("addres", c.getCarName());
 //                request.setAttribute("phone", c.getCarName());
