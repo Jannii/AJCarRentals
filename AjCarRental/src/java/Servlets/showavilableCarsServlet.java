@@ -147,8 +147,8 @@ public class showavilableCarsServlet extends HttpServlet {
 
             Query query = session.createSQLQuery(queryString);
             System.out.println("Query::::" + query.getQueryString().toString());
-            query.setParameter("startdate", pickupstring);
-            query.setParameter("returndate", dropoffstring);
+            query.setParameter("startdate", corrpuDate);
+            query.setParameter("returndate", corrdoDate);
             request.setAttribute("Carlist", query.list());
             request.getRequestDispatcher("listcars.jsp").forward(request, response);
             tx.commit();
